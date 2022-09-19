@@ -1,3 +1,17 @@
+game_stages = [
+    {
+        "category": "interactive",
+        "background": "./assets/images/first.png",
+        "music": "./assets/audio/music.mp3",
+        "enemies": [(500, 380)],
+        "player": (200, 380)
+    },
+    {
+        "category": "video",
+        "video": "./assets/videos/"
+    }
+]
+
 player_config = {
     "PLAYER_ANIMATION_STEPS": [16, 4, 12, 8, 8, 16],
     "ANIM_DEATH": 0,
