@@ -1,9 +1,4 @@
 import pygame
-from entity import Player, Enemy
-from pygame import mixer
-import moviepy.editor
-
-pygame.init()
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -11,12 +6,12 @@ FPS = 60
 
 YELLOW = (255, 255, 0)
 
-pygame.display.set_caption("")
 
-def setGameMode():
+def setGameMode(flags):
     global clock, screen, bg_image, player_spritesheet
     clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, 24)
 
     bg_image = pygame.image.load("./assets/images/first.png").convert_alpha()
     player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
@@ -40,35 +35,49 @@ def drawHealthBar(health, x, y, length):
 
 
 def playVideo(videoPath):
+    import moviepy.editor
     video = moviepy.editor.VideoFileClip(videoPath, verbose=False)
     video.preview()
     video.close()
     
-setGameMode()
 
-player = Player(200, 380, False, player_spritesheet)
-enemies = [Enemy(500, 380)]
+def main():
+    while 1:
+        clock.tick(FPS)
+        drawBackground()
 
-run = True
-while run:
-    clock.tick(FPS)
-    drawBackground()
-
-    player.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, enemies)
-    
-    drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
-    player.draw(screen)
-    
-    player.updateAnimation(screen, enemies)
-    
-    for enemy in enemies:
-        drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
-        enemy.draw(screen)
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+        player.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, enemies)
         
-    pygame.display.update()
+        drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
+        player.draw(screen)
+        
+        player.updateAnimation(screen, enemies)
+        
+        for enemy in enemies:
+            drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
+            enemy.draw(screen)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+            
+        pygame.display.update()
 
-pygame.quit()
+if __name__ == "__main__":
+    pygame.init()
+    pygame.display.set_caption("")
+    
+    pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
+    
+    from pygame.locals import DOUBLEBUF, HWSURFACE
+    flags = DOUBLEBUF | HWSURFACE
+    setGameMode(flags)
+    
+    # playMusic()
+
+    from entity import Player, Enemy
+    player = Player(200, 380, False, player_spritesheet)
+    enemies = [Enemy(500, 380)]
+    
+    main()
+    pygame.quit()
