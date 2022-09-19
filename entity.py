@@ -5,14 +5,14 @@ from time import time
 from config import player_config
 
 class Player():
-    def __init__(self, x, y, flip, player_spritesheet):
+    def __init__(self, x, y, player_spritesheet):
         self.vel_x = 1
         self.vel_y = 0
         self.base_speed = player_config["BASE_SPEED"]
 
         self.health = player_config["BASE_HEALTH"]
         
-        self.flip = flip
+        self.flip = False
         self.running = False
         self.jumping = False
         self.attacking = False
