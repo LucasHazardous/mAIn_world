@@ -6,7 +6,9 @@ def main():
     stageLoader = StageLoader()
     for stage in game_stages:
         if(stage["category"] == "interactive"):
-            stageLoader.loadStage(stage["background"], stage["music"], stage["player"], stage["enemies"])
+            stageLoader.playInteractiveStage(stage["background"], stage["music"], stage["player"], stage["enemies"])
+        elif(stage["category"] == "video"):
+            stageLoader.playVideo(stage["video"])
 
 if __name__ == "__main__":
     pygame.init()
