@@ -1,7 +1,7 @@
-from entity import Player, Enemy
+from entity.player import Player
+from entity.enemy import Enemy
 import pygame
-
-YELLOW = (255, 255, 0)
+from config import colors_config
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -22,6 +22,7 @@ class StageLoader():
         self.__loadScreen()
 
         self.__player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
+        self.__enemy_spritesheet = pygame.image.load("./assets/images/enemy.png").convert_alpha()
         
         
     def __loadScreen(self):
@@ -41,9 +42,9 @@ class StageLoader():
         
         
     def __drawHealthBar(self, health, x, y, length):
-        pygame.draw.rect(self.__screen, (0,0,0), (x-5, y-5, length+10, 40))
+        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_BG"], (x-5, y-5, length+10, 40))
         ratio = health / 100
-        pygame.draw.rect(self.__screen, YELLOW, (x, y, length * ratio, 30))
+        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (x, y, length * ratio, 30))
 
 
     def playVideo(self, videoPath):
@@ -58,7 +59,7 @@ class StageLoader():
         
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet)
-        enemies = [Enemy(enemyPos[0], enemyPos[1]) for enemyPos in enemiesPos]
+        enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet) for enemyPos in enemiesPos]
         self.__playMusic(musicPath)
         
         while 1:
@@ -78,6 +79,6 @@ class StageLoader():
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    return quit()
+                    quit()
                 
             pygame.display.update()
