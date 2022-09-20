@@ -15,31 +15,35 @@ class StageLoader():
         pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
         
         from pygame.locals import DOUBLEBUF, HWSURFACE
-        flags = DOUBLEBUF | HWSURFACE
+        self.flags = DOUBLEBUF | HWSURFACE
         
-        self.clock = pygame.time.Clock()
-    
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, DEPTH)
+        self.__clock = pygame.time.Clock()
+        
+        self.__loadScreen()
 
-        self.player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
+        self.__player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
+        
+        
+    def __loadScreen(self):
+        self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), self.flags, DEPTH)
       
 
-    def playMusic(self, musicPath):
+    def __playMusic(self, musicPath):
         pygame.mixer.music.stop()
         pygame.mixer.music.load(musicPath)
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1, 0.0, 5000)
 
 
-    def drawBackground(self, bg_image):
+    def __drawBackground(self, bg_image):
         scaled_bg = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.screen.blit(scaled_bg, (0,0))
+        self.__screen.blit(scaled_bg, (0,0))
         
         
-    def drawHealthBar(self, health, x, y, length):
-        pygame.draw.rect(self.screen, (0,0,0), (x-5, y-5, length+10, 40))
+    def __drawHealthBar(self, health, x, y, length):
+        pygame.draw.rect(self.__screen, (0,0,0), (x-5, y-5, length+10, 40))
         ratio = health / 100
-        pygame.draw.rect(self.screen, YELLOW, (x, y, length * ratio, 30))
+        pygame.draw.rect(self.__screen, YELLOW, (x, y, length * ratio, 30))
 
 
     def playVideo(self, videoPath):
@@ -49,29 +53,31 @@ class StageLoader():
         video.close()
 
 
-    def loadStage(self, bgImagePath, musicPath, playerPos, enemiesPos):
+    def playInteractiveStage(self, bgImagePath, musicPath, playerPos, enemiesPos):
+        self.__loadScreen()
+        
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
-        player = Player(playerPos[0], playerPos[1], self.player_spritesheet)
+        player = Player(playerPos[0], playerPos[1], self.__player_spritesheet)
         enemies = [Enemy(enemyPos[0], enemyPos[1]) for enemyPos in enemiesPos]
-        self.playMusic(musicPath)
+        self.__playMusic(musicPath)
         
         while 1:
-            self.clock.tick(FPS)
-            self.drawBackground(bg_image)
+            self.__clock.tick(FPS)
+            self.__drawBackground(bg_image)
 
-            player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.screen, enemies)
+            player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
             
-            self.drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
-            player.draw(self.screen)
+            self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
+            player.draw(self.__screen)
             
-            player.updateAnimation(self.screen, enemies)
+            player.updateAnimation(self.__screen, enemies)
             
             for enemy in enemies:
-                self.drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
-                enemy.draw(self.screen)
+                self.__drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
+                enemy.draw(self.__screen)
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    return
+                    return quit()
                 
             pygame.display.update()
