@@ -85,7 +85,7 @@ class Player(Entity):
                 self.frame_index = len(self.animation_list[self.action]) - 1
                 
         if self.action == player_config["ANIM_ATTACK"] and self.frame_index % 4 == 0 and self.frame_index not in self.attack_stages:
-            self.attack(surface, self.getClosetEnemy(enemies))
+            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies))
             self.attack_stages.add(self.frame_index)
             
      
@@ -128,11 +128,8 @@ class Player(Entity):
         
 
     def attack(self, surface, target):
-        # self.attacking = True
-        # self.body.right if not self.flip else self.body.left-self.body.width*2
         attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
         if attack_range.colliderect(target.body):
-            print(f"Attacked ${type(target).__name__}")
             target.health -= player_config["DAMAGE"]
             target.hit = True
         
@@ -143,7 +140,6 @@ class Player(Entity):
         if key[pygame.K_w] and not self.attacking:
             self.attacking = True
             self.attack_stages = set()
-            # self.attack(surface, self.getClosetEnemy(enemies))
         
         
     def getClosetEnemy(self, enemies):
