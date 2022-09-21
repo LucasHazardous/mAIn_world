@@ -17,7 +17,7 @@ class Entity():
         
         self.body = pygame.Rect((x, y, entity_config["HITBOX_WIDTH"], entity_config["HITBOX_HEIGHT"]))
         self.image_scale = entity_config["SCALE"]
-        self.action = 1
+        self.action = 0
         self.frame_index = 0
         
         self.animation_list = self.load_images(entity_spritesheet, entity_config["ANIMATION_STEPS"])
