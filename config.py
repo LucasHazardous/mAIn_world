@@ -52,8 +52,22 @@ enemy_config = {
     "HITBOX_WIDTH": 80,
     "HITBOX_HEIGHT": 180,
     "BASE_SPEED": 5,
-    "BASE_HEALTH": 100,
-    "DAMAGE": 10
+    "BASE_HEALTH": 100
+}
+
+projectile_config = {
+    "SPEED": 10,
+    "ANIMATION_STEPS": [45],
+    "SIZE_X": 64,
+    "SIZE_Y": 64,
+    "OFFSET": [32, 32],
+    "ANIMATION_COOLDOWN": 20,
+    "HITBOX_WIDTH": 64,
+    "HITBOX_HEIGHT": 64,
+    "BASE_HEALTH": 0,
+    "ANIM_FLY": 0,
+    "SCALE": 1,
+    "DAMAGE": 20
 }
 
 colors_config = {
