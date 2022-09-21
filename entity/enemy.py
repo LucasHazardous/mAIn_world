@@ -2,13 +2,15 @@ import pygame
 from time import time
 from config import enemy_config
 from entity.entity import Entity
+from entity.projectile import Projectile
 
 class Enemy(Entity):
-    def __init__(self, x, y, enemy_spritesheet):
+    def __init__(self, x, y, enemy_spritesheet, projectile_spritesheet):
         Entity.__init__(self, x, y, enemy_spritesheet, enemy_config)
+        self.projectile = Projectile(self.body.centerx, self.body.centery, projectile_spritesheet)
+        self.toRemove = False
         
-        
-    def updateAnimation(self, surface, enemies):
+    def updateAnimation(self, surface, target):
         if self.health <= 0:
             self.health = 0
             self.alive = False
@@ -26,7 +28,14 @@ class Enemy(Entity):
             self.frame_index = 0
             if self.action == enemy_config["ANIM_ATTACK"]:
                 self.attacking = False
+                self.released_projectile 
+                self.attack_stages = set()
+            elif self.action == enemy_config["ANIM_DEATH"]:
+                self.toRemove = True
                 
-        if self.action == enemy_config["ANIM_ATTACK"] and self.frame_index % 4 == 0 and self.frame_index not in self.attack_stages:
-            self.attack(surface, self.getClosetEnemy(enemies))
-            self.attack_stages.add(self.frame_index)
+        if (self.action == enemy_config["ANIM_ATTACK"] and self.frame_index >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]/2):
+            self.released_projectile = True
+            self.projectile.goToPosition(self.body.centerx, self.body.centery)
+            
+        self.projectile.updateAnimation(surface, target)
+        self.projectile.draw(surface)
