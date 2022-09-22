@@ -67,7 +67,8 @@ class StageLoader():
             self.__clock.tick(FPS)
             self.__drawBackground(bg_image)
 
-            player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
+            if(player.alive):
+                player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
             
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
             player.draw(self.__screen)
