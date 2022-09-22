@@ -6,7 +6,6 @@ from entity.entity import Entity
 class Projectile(Entity):
     def __init__(self, x, y, projectile_spritesheet):
         Entity.__init__(self, x, y, projectile_spritesheet, projectile_config)
-        self.released_projectile = False
         self.updateAction(projectile_config["ANIM_FLY"])
         
         
@@ -30,6 +29,6 @@ class Projectile(Entity):
         
     def attackTarget(self, target):
         if self.body.colliderect(target.body):
+            self.body.y = -projectile_config["HITBOX_HEIGHT"]
             target.health -= projectile_config["DAMAGE"]
             target.hit = True
-            self.body.y = -projectile_config["HITBOX_HEIGHT"]

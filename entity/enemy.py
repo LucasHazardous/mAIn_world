@@ -28,13 +28,11 @@ class Enemy(Entity):
             self.frame_index = 0
             if self.action == enemy_config["ANIM_ATTACK"]:
                 self.attacking = False
-                self.released_projectile 
                 self.attack_stages = set()
             elif self.action == enemy_config["ANIM_DEATH"]:
                 self.toRemove = True
                 
-        if (self.action == enemy_config["ANIM_ATTACK"] and self.frame_index >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]/2):
-            self.released_projectile = True
+        if (self.action == enemy_config["ANIM_ATTACK"] and self.frame_index >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]-1):
             self.projectile.goToPosition(self.body.centerx, self.body.centery)
             
         self.projectile.updateAnimation(surface, target)
