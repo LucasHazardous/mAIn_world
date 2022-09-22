@@ -7,7 +7,7 @@ game_stages = [
         "category": "interactive",
         "background": "./assets/images/first.png",
         "music": "./assets/audio/music.mp3",
-        "enemies": [(500, 380)],
+        "enemies": [(500, 380), (800, 380)],
         "player": (200, 380)
     },
     {
@@ -56,11 +56,11 @@ enemy_config = {
 }
 
 projectile_config = {
-    "SPEED": 10,
+    "SPEED": 20,
     "ANIMATION_STEPS": [45],
     "SIZE_X": 64,
     "SIZE_Y": 64,
-    "OFFSET": [32, 32],
+    "OFFSET": [0, 0],
     "ANIMATION_COOLDOWN": 20,
     "HITBOX_WIDTH": 64,
     "HITBOX_HEIGHT": 64,
