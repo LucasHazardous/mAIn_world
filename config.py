@@ -70,6 +70,20 @@ projectile_config = {
     "DAMAGE": 20
 }
 
+emp_config = {
+    "ANIMATION_STEPS": [28],
+    "SIZE_X": 96,
+    "SIZE_Y": 96,
+    "OFFSET": [0, 0],
+    "ANIMATION_COOLDOWN": 20,
+    "HITBOX_WIDTH": 192,
+    "HITBOX_HEIGHT": 192,
+    "BASE_HEALTH": 1,
+    "ANIM_BLAST": 0,
+    "SCALE": 2,
+    "DAMAGE": 0
+}
+
 colors_config = {
     "HEALTHBAR_MAIN": (255, 255, 0),
     "HEALTHBAR_BG": (0, 0, 0)

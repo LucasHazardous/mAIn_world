@@ -1,5 +1,6 @@
 from entity.player import Player
 from entity.enemy import Enemy
+from entity.emp import Emp
 import pygame
 from config import colors_config
 
@@ -24,6 +25,9 @@ class StageLoader():
         self.__player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
         self.__enemy_spritesheet = pygame.image.load("./assets/images/enemy.png").convert_alpha()
         self.__projectile = pygame.image.load("./assets/images/projectile.png").convert_alpha()
+        self.__emp_spritesheet = pygame.image.load("./assets/images/emp.png").convert_alpha()
+        
+        self.__emp = Emp(500, 380, self.__emp_spritesheet)
         
         
     def __loadScreen(self):
@@ -80,6 +84,9 @@ class StageLoader():
                 enemy.draw(self.__screen)
                 enemy.updateAnimation(self.__screen, player)
                 if(enemy.toRemove): enemies.remove(enemy)
+                
+            self.__emp.updateAnimation(self.__screen)
+            self.__emp.draw(self.__screen)
             
             
             for event in pygame.event.get():
