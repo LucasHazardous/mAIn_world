@@ -7,8 +7,10 @@ from entity.entity import Entity
 
 
 class Player(Entity):
-    def __init__(self, x, y, player_spritesheet):
+    def __init__(self, x, y, player_spritesheet, emp):
         Entity.__init__(self, x, y, player_spritesheet, player_config)
+        self.emp = emp
+        self.empUsed = False
         
         self.vel_x = 1
         self.vel_y = 0
@@ -38,6 +40,8 @@ class Player(Entity):
         self.jumpIfAllowed(key)
         
         self.performAttackIfAllowed(key, surface, enemies)
+        
+        self.useEmpIfAvailable(key, surface, enemies)
 
         self.verticalPlayerMovement(key, player_config["VERTICAL_ACCELERATION_LIMIT"])
         
@@ -47,6 +51,19 @@ class Player(Entity):
             
         self.body.x += self.change_x
         self.body.y += self.change_y
+        
+    
+    def useEmpIfAvailable(self, key, screen, enemies):
+        if(not self.empUsed and key[pygame.K_s]):
+            self.empUsed = True
+            self.emp.body.x = self.body.x
+            self.emp.body.y = self.body.y
+            for enemy in enemies: self.attack(screen, enemy, player_config["EMP_DAMAGE"])
+        
+        if(not self.emp.finished and self.empUsed):
+            self.emp.draw(screen)
+            self.emp.updateAnimation()
+            self.empUsed = True
         
         
     def groundLimit(self, screen_height):
@@ -85,7 +102,7 @@ class Player(Entity):
                 self.frame_index = len(self.animation_list[self.action]) - 1
                 
         if self.action == player_config["ANIM_ATTACK"] and self.frame_index % 4 == 0 and self.frame_index not in self.attack_stages:
-            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies))
+            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), player_config["DAMAGE"])
             self.attack_stages.add(self.frame_index)
             
      
@@ -127,10 +144,10 @@ class Player(Entity):
         self.change_y += self.vel_y
         
 
-    def attack(self, surface, target):
+    def attack(self, surface, target, damage):
         attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
         if attack_range.colliderect(target.body):
-            target.health -= player_config["DAMAGE"]
+            target.health -= damage
             target.hit = True
         
         pygame.draw.rect(surface, (0,255,0), attack_range)
