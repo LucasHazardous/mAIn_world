@@ -37,7 +37,8 @@ player_config = {
     "VERTICAL_ACCELERATION": 2,
     "VERTICAL_ACCELERATION_LIMIT": (2 ** 9) / 2,
     "GRAVITY": 2,
-    "DAMAGE": 20
+    "DAMAGE": 20,
+    "EMP_DAMAGE": 80
 }
 
 enemy_config = {
