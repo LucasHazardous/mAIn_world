@@ -7,8 +7,9 @@ class Emp(Entity):
     def __init__(self, x, y, emp_spritesheet):
         Entity.__init__(self, x, y, emp_spritesheet, emp_config)
         self.updateAction(emp_config["ANIM_BLAST"])
+        self.finished = False
         
-    def updateAnimation(self, surface):
+    def updateAnimation(self):
         current = pygame.time.get_ticks()
         self.image = self.animation_list[self.action][self.frame_index]
         
@@ -17,4 +18,4 @@ class Emp(Entity):
             self.last_animation_update_time = current
             
         if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+            self.finished = True
