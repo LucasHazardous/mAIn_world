@@ -27,7 +27,7 @@ class StageLoader():
         self.__projectile = pygame.image.load("./assets/images/projectile.png").convert_alpha()
         self.__emp_spritesheet = pygame.image.load("./assets/images/emp.png").convert_alpha()
         
-        self.__emp = Emp(500, 380, self.__emp_spritesheet)
+        self.__emp = Emp(0, 0, self.__emp_spritesheet)
         
         
     def __loadScreen(self):
@@ -63,7 +63,7 @@ class StageLoader():
         self.__loadScreen()
         
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
-        player = Player(playerPos[0], playerPos[1], self.__player_spritesheet)
+        player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
         self.__playMusic(musicPath)
         
@@ -84,9 +84,6 @@ class StageLoader():
                 enemy.draw(self.__screen)
                 enemy.updateAnimation(self.__screen, player)
                 if(enemy.toRemove): enemies.remove(enemy)
-                
-            self.__emp.updateAnimation(self.__screen)
-            self.__emp.draw(self.__screen)
             
             
             for event in pygame.event.get():
