@@ -1,8 +1,12 @@
 from entity.player import Player
 from entity.enemy import Enemy
 from entity.emp import Emp
-import pygame
 from config import colors_config
+
+import pygame
+from pygame.locals import DOUBLEBUF, HWSURFACE
+
+import moviepy.editor
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -15,7 +19,6 @@ class StageLoader():
         
         pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
         
-        from pygame.locals import DOUBLEBUF, HWSURFACE
         self.flags = DOUBLEBUF | HWSURFACE
         
         self.__clock = pygame.time.Clock()
@@ -53,7 +56,6 @@ class StageLoader():
 
 
     def playVideo(self, videoPath):
-        import moviepy.editor
         video = moviepy.editor.VideoFileClip(videoPath, verbose=False)
         video.preview()
         video.close()
@@ -66,6 +68,7 @@ class StageLoader():
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
         self.__playMusic(musicPath)
+        self.__emp.finished = False
         
         while 1:
             self.__clock.tick(FPS)
@@ -73,6 +76,7 @@ class StageLoader():
 
             if(player.alive):
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
+                if player.readyForNextStage: break
             
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
             player.draw(self.__screen)
