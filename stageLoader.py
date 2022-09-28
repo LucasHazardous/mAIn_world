@@ -1,6 +1,7 @@
 from entity.player import Player
 from entity.enemy import Enemy
 from entity.emp import Emp
+from entity.boss import Boss
 from config import colors_config
 
 import pygame
@@ -49,9 +50,9 @@ class StageLoader():
         self.__screen.blit(scaled_bg, (0,0))
         
         
-    def __drawHealthBar(self, health, x, y, length):
+    def __drawHealthBar(self, health, x, y, length, base_health):
         pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_BG"], (x-5, y-5, length+10, 40))
-        ratio = health / 100
+        ratio = health / base_health
         pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (x, y, length * ratio, 30))
 
 
@@ -74,20 +75,60 @@ class StageLoader():
             self.__clock.tick(FPS)
             self.__drawBackground(bg_image)
 
+
             if(player.alive):
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
                 if player.readyForNextStage: break
             
-            self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width)
+            self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
             player.draw(self.__screen)
-            
             player.updateAnimation(self.__screen, enemies)
-            
+        
+        
             for enemy in enemies:
-                self.__drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
+                self.__drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width, enemy.base_health)
                 enemy.draw(self.__screen)
                 enemy.updateAnimation(self.__screen, player)
                 if(not enemy.alive): enemies.remove(enemy)
+            
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                
+            pygame.display.update()
+            
+
+    def playBossFight(self, bgImagePath, musicPath, playerPos, bossPos):
+        self.__loadScreen()
+        
+        boss_spritesheet = pygame.image.load("./assets/images/boss.png").convert_alpha()
+        boss = Boss(bossPos[0], bossPos[1], boss_spritesheet)
+        enemies = [boss]
+        
+        bg_image = pygame.image.load(bgImagePath).convert_alpha()
+        player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
+        
+        self.__playMusic(musicPath)
+        self.__emp.finished = False
+        
+        while 1:
+            self.__clock.tick(FPS)
+            self.__drawBackground(bg_image)
+
+
+            if(player.alive):
+                player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
+                if player.readyForNextStage and not boss.alive: break
+
+            self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
+            player.draw(self.__screen)
+            player.updateAnimation(self.__screen, enemies)
+            
+            
+            boss.updateAnimation(self.__screen, player)
+            boss.draw(self.__screen)
+            self.__drawHealthBar(boss.health, boss.body.left, boss.body.top-50, boss.body.width, boss.base_health)
             
             
             for event in pygame.event.get():
