@@ -32,4 +32,4 @@ class Boss(Entity):
         if self.frame_index >= len(self.animation_list[self.action]):
             self.frame_index = 0
             if self.action == boss_config["ANIM_DEATH"]:
-                self.alive = True
+                self.alive = False

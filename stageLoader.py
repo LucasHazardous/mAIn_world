@@ -125,8 +125,7 @@ class StageLoader():
             player.draw(self.__screen)
             player.updateAnimation(self.__screen, enemies)
             
-            
-            boss.updateAnimation(self.__screen, player)
+            if(boss.alive): boss.updateAnimation(self.__screen, player)
             boss.draw(self.__screen)
             self.__drawHealthBar(boss.health, boss.body.left, boss.body.top-50, boss.body.width, boss.base_health)
             
