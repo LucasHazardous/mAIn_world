@@ -18,4 +18,5 @@ class Emp(Entity):
             self.last_animation_update_time = current
             
         if self.frame_index >= len(self.animation_list[self.action]):
+            self.frame_index = 0
             self.finished = True
