@@ -14,6 +14,13 @@ game_stages = [
         "category": "video",
         "video": "./assets/videos/prologue.mp4"
     },
+    {
+        "category": "boss",
+        "background": "./assets/images/first.png",
+        "music": "./assets/audio/music.mp3",
+        "boss": (500, 380),
+        "player": (200, 380)
+    }
 ]
 
 player_config = {
@@ -54,6 +61,24 @@ enemy_config = {
     "HITBOX_HEIGHT": 180,
     "BASE_SPEED": 5,
     "BASE_HEALTH": 100
+}
+
+boss_config = {
+    "ANIMATION_STEPS": [16, 10, 10],
+    "ANIM_DEATH": 0,
+    "ANIM_RUN": 1,
+    "ANIM_DASH": 2,
+    "SIZE_X": 64,
+    "SIZE_Y": 64,
+    "SCALE": 4,
+    "OFFSET": [20, 0],
+    "ANIMATION_COOLDOWN": 100,
+    "HITBOX_WIDTH": 96,
+    "HITBOX_HEIGHT": 180,
+    "BASE_SPEED": 5,
+    "BASE_HEALTH": 300,
+    "DAMAGE": 10,
+    "ANIM_DASH_ATTACK_FRAME": 5
 }
 
 projectile_config = {
