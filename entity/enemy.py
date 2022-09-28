@@ -8,12 +8,10 @@ class Enemy(Entity):
     def __init__(self, x, y, enemy_spritesheet, projectile_spritesheet):
         Entity.__init__(self, x, y, enemy_spritesheet, enemy_config)
         self.projectile = Projectile(self.body.centerx, self.body.centery, projectile_spritesheet)
-        self.toRemove = False
         
     def updateAnimation(self, surface, target):
         if self.health <= 0:
             self.health = 0
-            self.alive = False
             self.updateAction(enemy_config["ANIM_DEATH"])
         else: self.updateAction(enemy_config["ANIM_ATTACK"])
         
@@ -30,7 +28,7 @@ class Enemy(Entity):
                 self.attacking = False
                 self.attack_stages = set()
             elif self.action == enemy_config["ANIM_DEATH"]:
-                self.toRemove = True
+                self.alive = False
                 
         if (self.action == enemy_config["ANIM_ATTACK"] and self.frame_index >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]-1):
             self.projectile.goToPosition(self.body.centerx, self.body.centery)

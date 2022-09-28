@@ -87,7 +87,7 @@ class StageLoader():
                 self.__drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width)
                 enemy.draw(self.__screen)
                 enemy.updateAnimation(self.__screen, player)
-                if(enemy.toRemove): enemies.remove(enemy)
+                if(not enemy.alive): enemies.remove(enemy)
             
             
             for event in pygame.event.get():
