@@ -3,7 +3,8 @@ import pygame
 
 class Entity():
     def __init__(self, x, y, entity_spritesheet, entity_config):
-        self.health = entity_config["BASE_HEALTH"]
+        self.base_health = entity_config["BASE_HEALTH"]
+        self.health = self.base_health
         
         self.alive = True
         self.flip = True
