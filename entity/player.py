@@ -25,18 +25,16 @@ class Player(Entity):
         self.hit = False
         self.alive = True
         
-        self.finishedStage = False
         self.readyForNextStage = False
         
         self.attack_stages = set()
         
     def move(self, screen_width: int, screen_height: int, surface: pygame.Surface, enemies: List):
+        self.readyForNextStage = False
         self.change_x = 0
         self.change_y = 0
         self.running = False
         key = pygame.key.get_pressed()
-        
-        if(len(enemies) == 0): self.finishedStage = True
         
         self.jumpIfAllowed(key)
         
@@ -134,8 +132,7 @@ class Player(Entity):
             
         if self.body.right + self.change_x > screen_width:
             self.change_x = screen_width - self.body.right
-            if self.finishedStage:
-                self.readyForNextStage = True
+            self.readyForNextStage = True
 
 
     def jumpIfAllowed(self, key):

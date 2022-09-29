@@ -78,7 +78,7 @@ class StageLoader():
 
             if(player.alive):
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
-                if player.readyForNextStage: break
+                if len(enemies) == 0 and player.readyForNextStage: break
             
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
             player.draw(self.__screen)
