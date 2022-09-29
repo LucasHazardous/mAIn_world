@@ -14,6 +14,8 @@ SCREEN_HEIGHT = 600
 FPS = 60
 DEPTH = 24
 
+SPRITESHEET_PATH = "./assets/images/entities/"
+
 class StageLoader():
     def __init__(self):
         pygame.display.set_caption("")
@@ -26,10 +28,10 @@ class StageLoader():
         
         self.__loadScreen()
 
-        self.__player_spritesheet = pygame.image.load("./assets/images/player.png").convert_alpha()
-        self.__enemy_spritesheet = pygame.image.load("./assets/images/enemy.png").convert_alpha()
-        self.__projectile = pygame.image.load("./assets/images/projectile.png").convert_alpha()
-        self.__emp_spritesheet = pygame.image.load("./assets/images/emp.png").convert_alpha()
+        self.__player_spritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
+        self.__enemy_spritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
+        self.__projectile = pygame.image.load(SPRITESHEET_PATH + "projectile.png").convert_alpha()
+        self.__emp_spritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
         
         self.__emp = Emp(0, 0, self.__emp_spritesheet)
         
@@ -104,7 +106,7 @@ class StageLoader():
     def playBossFight(self, bgImagePath, musicPath, playerPos, bossPos):
         self.__loadScreen()
         
-        boss_spritesheet = pygame.image.load("./assets/images/boss.png").convert_alpha()
+        boss_spritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
         boss = Boss(bossPos[0], bossPos[1], boss_spritesheet)
         enemies = [boss]
         

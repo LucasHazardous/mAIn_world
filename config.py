@@ -5,8 +5,8 @@ game_stages = [
     },
     {
         "category": "interactive",
-        "background": "./assets/images/first.png",
-        "music": "./assets/audio/music.mp3",
+        "background": "./assets/images/stages/first.png",
+        "music": "./assets/audio/cyber-attack.mp3",
         "enemies": [(500, 380), (800, 380)],
         "player": (200, 380)
     },
@@ -16,8 +16,8 @@ game_stages = [
     },
     {
         "category": "boss",
-        "background": "./assets/images/first.png",
-        "music": "./assets/audio/music.mp3",
+        "background": "./assets/images/stages/first.png",
+        "music": "./assets/audio/cyberpunk-electro-sport-atomic.mp3",
         "boss": (500, 380),
         "player": (200, 380)
     }
