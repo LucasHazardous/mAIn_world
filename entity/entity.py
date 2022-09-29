@@ -27,7 +27,6 @@ class Entity():
     
     def draw(self, surface):
         img = pygame.transform.flip(self.image, self.flip, False)
-        pygame.draw.rect(surface, (255, 0, 0), self.body)
         surface.blit(img, (self.body.x-self.offset[0]*self.image_scale, self.body.y-self.offset[1]*self.image_scale))
         
         

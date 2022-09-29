@@ -150,8 +150,6 @@ class Player(Entity):
             target.health -= damage
             target.hit = True
         
-        pygame.draw.rect(surface, (0,255,0), attack_range)
-        
         
     def performAttackIfAllowed(self, key, surface: pygame.Surface, enemies):
         if key[pygame.K_w] and not self.attacking:
