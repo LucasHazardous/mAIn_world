@@ -8,7 +8,7 @@ class Boss(Entity):
         Entity.__init__(self, x, y, boss_spritesheet, boss_config)
         
     def updateAnimation(self, surface, player):
-        attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
+        attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)
         
         if self.health <= 0:
             self.health = 0
@@ -33,3 +33,13 @@ class Boss(Entity):
             self.frame_index = 0
             if self.action == boss_config["ANIM_DEATH"]:
                 self.alive = False
+
+        if(self.action == boss_config["ANIM_RUN"] and self.frame_index % 2 == 0): self.moveCloserToPlayer(player)
+
+    def moveCloserToPlayer(self, player):
+        if(player.body.centerx > self.body.centerx):
+            self.body.x += boss_config["SPEED"]
+            self.flip = False
+        elif(player.body.centerx < self.body.centerx):
+            self.body.x -= boss_config["SPEED"]
+            self.flip = True
