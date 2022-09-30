@@ -34,7 +34,7 @@ class Boss(Entity):
             if self.action == boss_config["ANIM_DEATH"]:
                 self.alive = False
 
-        if(self.action == boss_config["ANIM_RUN"] and self.frame_index % 2 == 0): self.moveCloserToPlayer(player)
+        if(self.action == boss_config["ANIM_RUN"]): self.moveCloserToPlayer(player)
 
     def moveCloserToPlayer(self, player):
         if(player.body.centerx > self.body.centerx):

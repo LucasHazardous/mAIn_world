@@ -80,7 +80,7 @@ boss_config = {
     "BASE_HEALTH": 500,
     "DAMAGE": 7,
     "ANIM_DASH_ATTACK_FRAME": 5,
-    "SPEED": 7
+    "SPEED": 3
 }
 
 projectile_config = {
