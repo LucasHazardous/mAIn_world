@@ -76,10 +76,10 @@ boss_config = {
     "HITBOX_WIDTH": 96,
     "HITBOX_HEIGHT": 180,
     "BASE_SPEED": 5,
-    "BASE_HEALTH": 300,
-    "DAMAGE": 10,
+    "BASE_HEALTH": 500,
+    "DAMAGE": 7,
     "ANIM_DASH_ATTACK_FRAME": 5,
-    "SPEED": 10
+    "SPEED": 7
 }
 
 projectile_config = {
