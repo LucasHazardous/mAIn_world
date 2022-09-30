@@ -1,4 +1,4 @@
-# mAIn world
+# mAIn_world
 
 <img src="./assets/images/stages/bar.png" alt="intro image" width="600"/>
 
