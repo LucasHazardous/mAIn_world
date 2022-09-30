@@ -34,7 +34,6 @@ class StageLoader():
         self.__emp = Emp(0, 0, self.__emp_spritesheet)
 
     def __playMusic(self, musicPath):
-        pygame.mixer.music.stop()
         pygame.mixer.music.load(musicPath)
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1, 0.0, 5000)
@@ -52,7 +51,6 @@ class StageLoader():
 
 
     def playCutscene(self, audioPath, imagePath):
-        pygame.mixer.music.stop()
         pygame.mixer.music.load(audioPath)
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(1, 0.0, 5000)
@@ -73,7 +71,7 @@ class StageLoader():
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
-        self.__playMusic(musicPath)
+        if(musicPath != ""): self.__playMusic(musicPath)
         self.__emp.finished = False
         
         while 1:
@@ -115,7 +113,7 @@ class StageLoader():
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         
-        self.__playMusic(musicPath)
+        if(musicPath != ""): self.__playMusic(musicPath)
         self.__emp.finished = False
         
         while 1:

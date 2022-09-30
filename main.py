@@ -11,6 +11,7 @@ def main():
             stageLoader.playCutscene(stage["audio"], stage["image"])
         elif(stage["category"] == "boss"):
             stageLoader.playBossFight(stage["background"], stage["music"], stage["player"], stage["boss"])
+        pygame.mixer.music.stop()
 
 if __name__ == "__main__":
     pygame.init()
