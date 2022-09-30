@@ -83,6 +83,7 @@ class StageLoader():
                 if len(enemies) == 0 and player.readyForNextStage: break
             elif(pygame.key.get_pressed()[pygame.K_r]):
                 self.playInteractiveStage(bgImagePath, musicPath, playerPos, enemiesPos)
+                break
             
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
             player.draw(self.__screen)
@@ -126,6 +127,7 @@ class StageLoader():
                 if player.readyForNextStage and not boss.alive: break
             elif(pygame.key.get_pressed()[pygame.K_r]):
                 self.playBossFight(bgImagePath, musicPath, playerPos, bossPos)
+                break
 
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
             player.draw(self.__screen)
