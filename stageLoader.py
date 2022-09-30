@@ -16,7 +16,7 @@ SPRITESHEET_PATH = "./assets/images/entities/"
 
 class StageLoader():
     def __init__(self):
-        pygame.display.set_caption("")
+        pygame.display.set_caption("mAIn_world")
         
         pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
         
