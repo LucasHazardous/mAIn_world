@@ -1,7 +1,8 @@
 game_stages = [
     {
-        "category": "video",
-        "video": "./assets/videos/prologue.mp4"
+        "category": "cutscene",
+        "audio": "./assets/audio/introduction.mp3",
+        "image": "./assets/images/stages/bar.png"
     },
     {
         "category": "interactive",

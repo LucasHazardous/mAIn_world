@@ -7,8 +7,8 @@ def main():
     for stage in game_stages:
         if(stage["category"] == "interactive"):
             stageLoader.playInteractiveStage(stage["background"], stage["music"], stage["player"], stage["enemies"])
-        elif(stage["category"] == "video"):
-            stageLoader.playVideo(stage["video"])
+        elif(stage["category"] == "cutscene"):
+            stageLoader.playCutscene(stage["audio"], stage["image"])
         elif(stage["category"] == "boss"):
             stageLoader.playBossFight(stage["background"], stage["music"], stage["player"], stage["boss"])
 

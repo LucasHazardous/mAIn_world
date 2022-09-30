@@ -7,8 +7,6 @@ from config import colors_config
 import pygame
 from pygame.locals import DOUBLEBUF, HWSURFACE
 
-import moviepy.editor
-
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 FPS = 60
@@ -26,7 +24,7 @@ class StageLoader():
         
         self.__clock = pygame.time.Clock()
         
-        self.__loadScreen()
+        self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), self.flags, DEPTH)
 
         self.__player_spritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
         self.__enemy_spritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
@@ -34,11 +32,6 @@ class StageLoader():
         self.__emp_spritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
         
         self.__emp = Emp(0, 0, self.__emp_spritesheet)
-        
-        
-    def __loadScreen(self):
-        self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), self.flags, DEPTH)
-      
 
     def __playMusic(self, musicPath):
         pygame.mixer.music.stop()
@@ -58,15 +51,25 @@ class StageLoader():
         pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (x, y, length * ratio, 30))
 
 
-    def playVideo(self, videoPath):
-        video = moviepy.editor.VideoFileClip(videoPath, verbose=False)
-        video.preview()
-        video.close()
+    def playCutscene(self, audioPath, imagePath):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load(audioPath)
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(1, 0.0, 5000)
+        
+        img = pygame.image.load(imagePath).convert()
+        self.__drawBackground(img)
+        pygame.display.update()
+        
+        while pygame.mixer.music.get_busy():
+            self.__clock.tick(FPS)
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
 
 
     def playInteractiveStage(self, bgImagePath, musicPath, playerPos, enemiesPos):
-        self.__loadScreen()
-        
         bg_image = pygame.image.load(bgImagePath).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
@@ -105,8 +108,6 @@ class StageLoader():
             
 
     def playBossFight(self, bgImagePath, musicPath, playerPos, bossPos):
-        self.__loadScreen()
-        
         boss_spritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
         boss = Boss(bossPos[0], bossPos[1], boss_spritesheet)
         enemies = [boss]
