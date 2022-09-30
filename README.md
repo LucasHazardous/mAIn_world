@@ -16,10 +16,10 @@ Your plan is to put an end to their dominance.
 
 ## Controls
 
-<kbd>W</kbd> - jump <br />
+<kbd>W</kbd> - katana attack <br />
 <kbd>D</kbd> - go right <br />
 <kbd>A</kbd> - go left <br />
-<kbd>SPACE</kbd> - katana attack <br />
+<kbd>SPACE</kbd> - jump <br />
 <kbd>S</kbd> - emp, deals massive damage, you get only 1 per stage - use it wisely <br />
 <kbd>R</kbd> - restart a stage after death, you get an unlimited amount of attempts <br />
 
