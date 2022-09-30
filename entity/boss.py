@@ -5,7 +5,7 @@ from entity.entity import Entity
 
 class Boss(Entity):
     def __init__(self, x, y, boss_spritesheet):
-        Entity.__init__(self, x, y, boss_spritesheet, boss_config)
+        super().__init__(x, y, boss_spritesheet, boss_config)
         
     def updateAnimation(self, surface, player):
         attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)

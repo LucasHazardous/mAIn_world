@@ -6,7 +6,7 @@ from entity.projectile import Projectile
 
 class Enemy(Entity):
     def __init__(self, x, y, enemy_spritesheet, projectile_spritesheet):
-        Entity.__init__(self, x, y, enemy_spritesheet, enemy_config)
+        super().__init__(x, y, enemy_spritesheet, enemy_config)
         self.projectile = Projectile(self.body.centerx, self.body.centery, projectile_spritesheet)
         
     def updateAnimation(self, surface, target):

@@ -5,7 +5,7 @@ from entity.entity import Entity
 
 class Projectile(Entity):
     def __init__(self, x, y, projectile_spritesheet):
-        Entity.__init__(self, x, y, projectile_spritesheet, projectile_config)
+        super().__init__(x, y, projectile_spritesheet, projectile_config)
         self.updateAction(projectile_config["ANIM_FLY"])
         
         
