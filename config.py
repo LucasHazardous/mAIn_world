@@ -6,21 +6,57 @@ game_stages = [
     },
     {
         "category": "interactive",
-        "background": "./assets/images/stages/first.png",
-        "music": "./assets/audio/cyber-attack.mp3",
-        "enemies": [(500, 380), (800, 380)],
-        "player": (200, 380)
+        "background": "./assets/images/stages/abandoned1.png",
+        "music": "",
+        "enemies": [],
+        "player": (100, 380)
     },
     {
-        "category": "video",
-        "video": "./assets/videos/prologue.mp4"
+        "category": "interactive",
+        "background": "./assets/images/stages/abandoned2.png",
+        "music": "./assets/audio/cyber-attack.mp3",
+        "enemies": [(600, 380), (800, 380)],
+        "player": (50, 380)
+    },
+    {
+        "category": "interactive",
+        "background": "./assets/images/stages/park.png",
+        "music": "./assets/audio/80s-synth-wave.mp3",
+        "enemies": [],
+        "player": (100, 380)
+    },
+    {
+        "category": "interactive",
+        "background": "./assets/images/stages/building.png",
+        "music": "./assets/audio/cyber-attack.mp3",
+        "enemies": [(500, 380), (600, 380), (800, 380)],
+        "player": (50, 380)
+    },
+    {
+        "category": "interactive",
+        "background": "./assets/images/stages/lobby.png",
+        "music": "./assets/audio/trap-auto-drift-sport.mp3",
+        "enemies": [],
+        "player": (50, 380)
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/boss-dialogue.mp3",
+        "image": "./assets/images/stages/boss-meeting.jpg"
     },
     {
         "category": "boss",
-        "background": "./assets/images/stages/first.png",
+        "background": "./assets/images/stages/skyscraper.png",
         "music": "./assets/audio/cyberpunk-electro-sport-atomic.mp3",
         "boss": (500, 380),
         "player": (200, 380)
+    },
+    {
+        "category": "interactive",
+        "background": "./assets/images/stages/exit.png",
+        "music": "./assets/audio/endless-party.mp3",
+        "enemies": [],
+        "player": (50, 380)
     }
 ]
 
