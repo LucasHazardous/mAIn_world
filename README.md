@@ -1,6 +1,6 @@
 # mAIn_world
 
-<img src="./assets/images/stages/bar.png" alt="intro image" width="600"/>
+<img src="./src/assets/images/stages/bar.png" alt="intro image" width="600"/>
 
 ---
 
@@ -11,6 +11,25 @@ World is now controlled by mega corporations that produce robots with advanced c
 Your plan is to put an end to their dominance.
 
 > A journey of a thousand miles begins with a single step.
+
+---
+
+## How to run
+
+1. Install Python version 3.
+2. Install pygame with: 
+
+```
+pip install pygame
+```
+
+3. Clone this repository with git clone or download a zip file and unpack it.
+4. Navigate inside **src** directory of this project.
+5. Open terminal and run game with command:
+
+```
+python main.py
+```
 
 ---
 
