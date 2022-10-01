@@ -114,9 +114,10 @@ boss_config = {
     "HITBOX_HEIGHT": 180,
     "BASE_SPEED": 5,
     "BASE_HEALTH": 500,
-    "DAMAGE": 7,
+    "DAMAGE": 10,
     "ANIM_DASH_ATTACK_FRAME": 5,
-    "SPEED": 3
+    "SPEED": 4,
+    "TELEPORT_RANGE": (100, 800)
 }
 
 projectile_config = {

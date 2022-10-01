@@ -2,6 +2,7 @@ import pygame
 from time import time
 from config import boss_config
 from entity.entity import Entity
+from random import randrange
 
 class Boss(Entity):
     def __init__(self, x, y, boss_spritesheet):
@@ -28,6 +29,7 @@ class Boss(Entity):
                     player.health -= boss_config["DAMAGE"]
                     player.hit = True
                     self.frame_index += 1
+                    self.body.x = randrange(boss_config["TELEPORT_RANGE"][0], boss_config["TELEPORT_RANGE"][1])
             
         if self.frame_index >= len(self.animation_list[self.action]):
             self.frame_index = 0
