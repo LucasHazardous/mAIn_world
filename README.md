@@ -44,8 +44,6 @@ python main.py
 
 After clearing a stage from enemies touch the right border to move to the next stage. <br />
 
-Run the main.py file with Python (version 3) to start the game.
-
 ---
 
 ## Art
