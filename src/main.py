@@ -1,4 +1,9 @@
-import pygame
+try:
+    import pygame
+except ImportError:
+    print("pygame is not installed. Install it with 'pip install pygame'")
+    quit()
+    
 from stageLoader import StageLoader
 from config import game_stages
 
