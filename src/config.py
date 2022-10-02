@@ -5,35 +5,35 @@ game_stages = [
         "background": "./assets/images/stages/bar.png"
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/abandoned1.png",
         "audio": "",
         "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/abandoned2.png",
         "audio": "./assets/audio/cyber-attack.mp3",
         "enemiesPos": [(600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/park.png",
         "audio": "./assets/audio/80s-synth-wave.mp3",
         "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/building.png",
         "audio": "./assets/audio/cyber-attack.mp3",
         "enemiesPos": [(500, 380), (600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/lobby.png",
         "audio": "./assets/audio/trap-auto-drift-sport.mp3",
         "enemiesPos": [],
@@ -52,7 +52,7 @@ game_stages = [
         "playerPos": (200, 380)
     },
     {
-        "category": "interactive",
+        "category": "normal",
         "background": "./assets/images/stages/exit.png",
         "audio": "./assets/audio/endless-party.mp3",
         "enemiesPos": [],

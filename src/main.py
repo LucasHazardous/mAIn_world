@@ -10,12 +10,10 @@ from config import game_stages
 def main():
     stageLoader = StageLoader()
     for stage in game_stages:
-        if(stage["category"] == "interactive"):
-            stageLoader.playInteractiveStage(**stage)
+        if(stage["category"] in ("normal", "bossFight")):
+            stageLoader.loadInteractiveStage(**stage)
         elif(stage["category"] == "cutscene"):
             stageLoader.playCutscene(**stage)
-        elif(stage["category"] == "bossFight"):
-            stageLoader.playBossFight(**stage)
         pygame.mixer.music.stop()
 
 if __name__ == "__main__":
