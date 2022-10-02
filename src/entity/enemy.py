@@ -16,21 +16,21 @@ class Enemy(Entity):
         else: self.updateAction(enemy_config["ANIM_ATTACK"])
         
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
             if self.action == enemy_config["ANIM_ATTACK"]:
                 self.attacking = False
                 self.attack_stages = set()
             elif self.action == enemy_config["ANIM_DEATH"]:
                 self.alive = False
                 
-        if (self.action == enemy_config["ANIM_ATTACK"] and self.frame_index >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]-1):
+        if (self.action == enemy_config["ANIM_ATTACK"] and self.frameIndex >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]-1):
             self.projectile.goToPosition(self.body.centerx, self.body.centery)
             
         self.projectile.updateAnimation(surface, target)

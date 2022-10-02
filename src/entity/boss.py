@@ -18,21 +18,21 @@ class Boss(Entity):
         else: self.updateAction(boss_config["ANIM_RUN"])
         
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.action == boss_config["ANIM_DASH"] and self.frame_index == boss_config["ANIM_DASH_ATTACK_FRAME"]:
+        if self.action == boss_config["ANIM_DASH"] and self.frameIndex == boss_config["ANIM_DASH_ATTACK_FRAME"]:
                 if(attack_range.colliderect(player.body)):
                     player.health -= boss_config["DAMAGE"]
                     player.hit = True
-                    self.frame_index += 1
+                    self.frameIndex += 1
                     self.body.x = randrange(boss_config["TELEPORT_RANGE"][0], boss_config["TELEPORT_RANGE"][1])
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
             if self.action == boss_config["ANIM_DEATH"]:
                 self.alive = False
 

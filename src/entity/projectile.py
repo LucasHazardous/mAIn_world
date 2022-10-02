@@ -11,14 +11,14 @@ class Projectile(Entity):
         
     def updateAnimation(self, surface, target):
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
             
         self.body.x -= projectile_config["SPEED"]
         self.attackTarget(target)

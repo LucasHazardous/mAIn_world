@@ -84,25 +84,25 @@ class Player(Entity):
         else: self.updateAction(player_config["ANIM_IDLE"])
         
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
             if self.action == player_config["ANIM_ATTACK"]:
                 self.attacking = False
             elif self.action == player_config["ANIM_HIT"]:
                 self.attacking = False
                 self.hit = False
             elif self.alive == False:
-                self.frame_index = len(self.animation_list[self.action]) - 1
+                self.frameIndex = len(self.animationList[self.action]) - 1
                 
-        if self.action == player_config["ANIM_ATTACK"] and self.frame_index % 4 == 0 and self.frame_index not in self.attack_stages:
+        if self.action == player_config["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.attack_stages:
             if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), player_config["DAMAGE"])
-            self.attack_stages.add(self.frame_index)
+            self.attack_stages.add(self.frameIndex)
             
      
     def verticalPlayerMovement(self, key, vel_x_limit):
