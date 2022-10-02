@@ -45,10 +45,10 @@ class StageLoader():
         self.__screen.blit(scaled_bg, (0,0))
         
         
-    def __drawHealthBar(self, health, x, y, length, baseHealth):
-        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_BG"], (x-5, y-5, length+10, 40))
-        ratio = health / baseHealth
-        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (x, y, length * ratio, 30))
+    def __drawHealthBar(self, entity):
+        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_BG"], (entity.body.left - 5, entity.body.top - 55, entity.body.width+10, 40))
+        ratio = entity.health / entity.baseHealth
+        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (entity.body.left, entity.body.top-50, entity.body.width * ratio, 30))
 
 
     def playCutscene(self, category, audio, background):
@@ -91,13 +91,13 @@ class StageLoader():
                 self.loadInteractiveStage(category, background, audio, playerPos, enemiesPos, bossPos)
                 break
             
-            self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.baseHealth)
+            self.__drawHealthBar(player)
             player.draw(self.__screen)
             player.updateAnimation(self.__screen, enemies)
         
         
             for enemy in enemies:
-                self.__drawHealthBar(enemy.health, enemy.body.left, enemy.body.top-50, enemy.body.width, enemy.baseHealth)
+                self.__drawHealthBar(enemy)
                 enemy.draw(self.__screen)
                 enemy.updateAnimation(self.__screen, player)
                 if(not enemy.alive): enemies.remove(enemy)
