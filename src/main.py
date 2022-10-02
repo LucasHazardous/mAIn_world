@@ -11,11 +11,11 @@ def main():
     stageLoader = StageLoader()
     for stage in game_stages:
         if(stage["category"] == "interactive"):
-            stageLoader.playInteractiveStage(stage["background"], stage["music"], stage["player"], stage["enemies"])
+            stageLoader.playInteractiveStage(**stage)
         elif(stage["category"] == "cutscene"):
-            stageLoader.playCutscene(stage["audio"], stage["image"])
-        elif(stage["category"] == "boss"):
-            stageLoader.playBossFight(stage["background"], stage["music"], stage["player"], stage["boss"])
+            stageLoader.playCutscene(**stage)
+        elif(stage["category"] == "bossFight"):
+            stageLoader.playBossFight(**stage)
         pygame.mixer.music.stop()
 
 if __name__ == "__main__":

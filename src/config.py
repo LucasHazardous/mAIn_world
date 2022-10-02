@@ -2,61 +2,61 @@ game_stages = [
     {
         "category": "cutscene",
         "audio": "./assets/audio/introduction.mp3",
-        "image": "./assets/images/stages/bar.png"
+        "background": "./assets/images/stages/bar.png"
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/abandoned1.png",
-        "music": "",
-        "enemies": [],
-        "player": (100, 380)
+        "audio": "",
+        "enemiesPos": [],
+        "playerPos": (100, 380)
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/abandoned2.png",
-        "music": "./assets/audio/cyber-attack.mp3",
-        "enemies": [(600, 380), (800, 380)],
-        "player": (50, 380)
+        "audio": "./assets/audio/cyber-attack.mp3",
+        "enemiesPos": [(600, 380), (800, 380)],
+        "playerPos": (50, 380)
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/park.png",
-        "music": "./assets/audio/80s-synth-wave.mp3",
-        "enemies": [],
-        "player": (100, 380)
+        "audio": "./assets/audio/80s-synth-wave.mp3",
+        "enemiesPos": [],
+        "playerPos": (100, 380)
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/building.png",
-        "music": "./assets/audio/cyber-attack.mp3",
-        "enemies": [(500, 380), (600, 380), (800, 380)],
-        "player": (50, 380)
+        "audio": "./assets/audio/cyber-attack.mp3",
+        "enemiesPos": [(500, 380), (600, 380), (800, 380)],
+        "playerPos": (50, 380)
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/lobby.png",
-        "music": "./assets/audio/trap-auto-drift-sport.mp3",
-        "enemies": [],
-        "player": (50, 380)
+        "audio": "./assets/audio/trap-auto-drift-sport.mp3",
+        "enemiesPos": [],
+        "playerPos": (50, 380)
     },
     {
         "category": "cutscene",
         "audio": "./assets/audio/boss-dialogue.mp3",
-        "image": "./assets/images/stages/boss-meeting.jpg"
+        "background": "./assets/images/stages/boss-meeting.jpg"
     },
     {
-        "category": "boss",
+        "category": "bossFight",
         "background": "./assets/images/stages/skyscraper.png",
-        "music": "./assets/audio/cyberpunk-electro-sport-atomic.mp3",
-        "boss": (500, 380),
-        "player": (200, 380)
+        "audio": "./assets/audio/cyberpunk-electro-sport-atomic.mp3",
+        "bossPos": (500, 380),
+        "playerPos": (200, 380)
     },
     {
         "category": "interactive",
         "background": "./assets/images/stages/exit.png",
-        "music": "./assets/audio/endless-party.mp3",
-        "enemies": [],
-        "player": (50, 380)
+        "audio": "./assets/audio/endless-party.mp3",
+        "enemiesPos": [],
+        "playerPos": (50, 380)
     }
 ]
 

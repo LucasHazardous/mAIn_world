@@ -50,10 +50,10 @@ class StageLoader():
         pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (x, y, length * ratio, 30))
 
 
-    def playCutscene(self, audioPath, imagePath):
-        self.__playAudio(audioPath, 1)
+    def playCutscene(self, category, audio, background):
+        self.__playAudio(audio, 1)
         
-        img = pygame.image.load(imagePath).convert()
+        img = pygame.image.load(background).convert()
         self.__drawBackground(img)
         pygame.display.update()
         
@@ -65,11 +65,11 @@ class StageLoader():
                     quit()
 
 
-    def playInteractiveStage(self, bgImagePath, musicPath, playerPos, enemiesPos):
-        bg_image = pygame.image.load(bgImagePath).convert_alpha()
+    def playInteractiveStage(self, category, background, audio, playerPos, enemiesPos):
+        bg_image = pygame.image.load(background).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
-        if(musicPath != ""): self.__playAudio(musicPath)
+        if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False
         
         while 1:
@@ -81,7 +81,7 @@ class StageLoader():
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
                 if len(enemies) == 0 and player.readyForNextStage: break
             elif(pygame.key.get_pressed()[pygame.K_r]):
-                self.playInteractiveStage(bgImagePath, musicPath, playerPos, enemiesPos)
+                self.playInteractiveStage(background, audio, player, enemiesPos)
                 break
             
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
@@ -103,15 +103,15 @@ class StageLoader():
             pygame.display.update()
             
 
-    def playBossFight(self, bgImagePath, musicPath, playerPos, bossPos):
+    def playBossFight(self, category, background, audio, playerPos, bossPos):
         boss_spritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
         boss = Boss(bossPos[0], bossPos[1], boss_spritesheet)
         enemies = [boss]
         
-        bg_image = pygame.image.load(bgImagePath).convert_alpha()
+        bg_image = pygame.image.load(background).convert_alpha()
         player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
         
-        if(musicPath != ""): self.__playAudio(musicPath)
+        if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False
         
         while 1:
@@ -123,7 +123,7 @@ class StageLoader():
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
                 if player.readyForNextStage and not boss.alive: break
             elif(pygame.key.get_pressed()[pygame.K_r]):
-                self.playBossFight(bgImagePath, musicPath, playerPos, bossPos)
+                self.playBossFight(background, audio, playerPos, bossPos)
                 break
 
             self.__drawHealthBar(player.health, player.body.left, player.body.top-50, player.body.width, player.base_health)
