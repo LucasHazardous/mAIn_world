@@ -12,9 +12,9 @@ class Player(Entity):
         self.emp = emp
         self.empUsed = False
         
-        self.vel_x = 1
-        self.vel_y = 0
-        self.base_speed = player_config["BASE_SPEED"]
+        self.velX = 1
+        self.velY = 0
+        self.baseSpeed = player_config["BASE_SPEED"]
 
         self.health = player_config["BASE_HEALTH"]
         
@@ -27,12 +27,12 @@ class Player(Entity):
         
         self.readyForNextStage = False
         
-        self.attack_stages = set()
+        self.stagesDealingDamage = set()
         
-    def move(self, screen_width: int, screen_height: int, surface: pygame.Surface, enemies: List):
+    def move(self, screenWidth: int, screenHeight: int, surface: pygame.Surface, enemies: List):
         self.readyForNextStage = False
-        self.change_x = 0
-        self.change_y = 0
+        self.changeX = 0
+        self.changeY = 0
         self.running = False
         key = pygame.key.get_pressed()
         
@@ -44,12 +44,12 @@ class Player(Entity):
 
         self.verticalPlayerMovement(key, player_config["VERTICAL_ACCELERATION_LIMIT"])
         
-        self.leftRightBorderLimit(screen_width)
+        self.leftRightBorderLimit(screenWidth)
             
-        self.groundLimit(screen_height)
+        self.groundLimit(screenHeight)
             
-        self.body.x += self.change_x
-        self.body.y += self.change_y
+        self.body.x += self.changeX
+        self.body.y += self.changeY
         
     
     def useEmpIfAvailable(self, key, screen, enemies):
@@ -65,11 +65,11 @@ class Player(Entity):
             self.empUsed = True
         
         
-    def groundLimit(self, screen_height):
-        if self.body.bottom + self.change_y > screen_height - 50:
-            self.vel_y = 0
+    def groundLimit(self, screenHeight):
+        if self.body.bottom + self.changeY > screenHeight - 50:
+            self.velY = 0
             self.jumping = False
-            self.change_y = screen_height - 50 - self.body.bottom
+            self.changeY = screenHeight - 50 - self.body.bottom
         
         
     def updateAnimation(self, surface, enemies):
@@ -100,53 +100,53 @@ class Player(Entity):
             elif self.alive == False:
                 self.frameIndex = len(self.animationList[self.action]) - 1
                 
-        if self.action == player_config["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.attack_stages:
+        if self.action == player_config["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.stagesDealingDamage:
             if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), player_config["DAMAGE"])
-            self.attack_stages.add(self.frameIndex)
+            self.stagesDealingDamage.add(self.frameIndex)
             
      
-    def verticalPlayerMovement(self, key, vel_x_limit):
+    def verticalPlayerMovement(self, key, limitVelX):
         if key[pygame.K_a]:
-            if(not self.flip): self.vel_x = 1
-            self.change_x = -self.base_speed - self.vel_x / 100
+            if(not self.flip): self.velX = 1
+            self.changeX = 1-self.baseSpeed - self.velX / 100
             
             self.flip = True
             self.running = True
             
         elif key[pygame.K_d]:
-            if(self.flip): self.vel_x = 1
-            self.change_x = self.base_speed + self.vel_x / 100
+            if(self.flip): self.velX = 1
+            self.changeX = self.baseSpeed + self.velX / 100
             
             self.flip = False
             self.running = True
             
-        else: self.vel_x = 1
+        else: self.velX = 1
             
-        if(self.vel_x < vel_x_limit):
-            self.vel_x *= player_config["VERTICAL_ACCELERATION"]
+        if(self.velX < limitVelX):
+            self.velX *= player_config["VERTICAL_ACCELERATION"]
         
 
-    def leftRightBorderLimit(self, screen_width):
-        if self.body.left + self.change_x < 0:
-            self.change_x = 0 - self.body.left
+    def leftRightBorderLimit(self, screenWidth):
+        if self.body.left + self.changeX < 0:
+            self.changeX = 0 - self.body.left
             
-        if self.body.right + self.change_x > screen_width:
-            self.change_x = screen_width - self.body.right
+        if self.body.right + self.changeX > screenWidth:
+            self.changeX = screenWidth - self.body.right
             self.readyForNextStage = True
 
 
     def jumpIfAllowed(self, key):
         if key[pygame.K_SPACE] and not self.jumping:
-            self.vel_y -= player_config["JUMP_HEIGHT"]
+            self.velY -= player_config["JUMP_HEIGHT"]
             self.jumping = True
             
-        self.vel_y += player_config["GRAVITY"]
-        self.change_y += self.vel_y
+        self.velY += player_config["GRAVITY"]
+        self.changeY += self.velY
         
 
     def attack(self, surface, target, damage):
-        attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
-        if attack_range.colliderect(target.body):
+        attackRange = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
+        if attackRange.colliderect(target.body):
             target.health -= damage
             target.hit = True
         
@@ -154,15 +154,15 @@ class Player(Entity):
     def performAttackIfAllowed(self, key, surface: pygame.Surface, enemies):
         if key[pygame.K_w] and not self.attacking:
             self.attacking = True
-            self.attack_stages = set()
+            self.stagesDealingDamage = set()
         
         
     def getClosetEnemy(self, enemies):
-        min_distance = inf
-        closet_enemy = None
+        minDistance = inf
+        closetEnemy = None
         for enemy in enemies:
             distance = sqrt(pow(self.body.x-enemy.body.x, 2) + pow(self.body.y-enemy.body.y, 2))
-            if distance < min_distance:
-                min_distance = distance
-                closet_enemy = enemy
-        return closet_enemy
+            if distance < minDistance:
+                minDistance = distance
+                closetEnemy = enemy
+        return closetEnemy
