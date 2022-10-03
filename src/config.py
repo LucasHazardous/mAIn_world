@@ -1,4 +1,4 @@
-game_stages = [
+gameStages = [
     {
         "category": "cutscene",
         "audio": "./assets/audio/introduction.mp3",
@@ -45,7 +45,7 @@ game_stages = [
         "background": "./assets/images/stages/boss-meeting.jpg"
     },
     {
-        "category": "bossFight",
+        "category": "normal",
         "background": "./assets/images/stages/skyscraper.png",
         "audio": "./assets/audio/cyberpunk-electro-sport-atomic.mp3",
         "bossPos": (500, 380),

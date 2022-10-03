@@ -5,13 +5,13 @@ except ImportError:
     quit()
     
 from stageLoader import StageLoader
-from config import game_stages
+from config import gameStages
 
 def main():
     stageLoader = StageLoader()
-    for stage in game_stages:
-        if(stage["category"] in ("normal", "bossFight")):
-            stageLoader.loadInteractiveStage(**stage)
+    for stage in gameStages:
+        if(stage["category"] == "normal"):
+            stageLoader.loadNormalStage(**stage)
         elif(stage["category"] == "cutscene"):
             stageLoader.playCutscene(**stage)
         pygame.mixer.music.stop()

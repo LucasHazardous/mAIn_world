@@ -66,15 +66,15 @@ class StageLoader():
                     quit()
 
 
-    def loadInteractiveStage(self, category, background, audio, playerPos, enemiesPos=None, bossPos=None):
-        bg_image = pygame.image.load(background).convert()
+    def loadNormalStage(self, category, background, audio, playerPos, enemiesPos=[], bossPos=None):
+        convertedBackground = pygame.image.load(background).convert()
         
         player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
         
-        if category == "normal":
-            enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
-        else:
-            enemies = [Boss(bossPos[0], bossPos[1], self.__bossSpritesheet)]
+        enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
+        
+        if(bossPos != None):
+            enemies.append(Boss(bossPos[0], bossPos[1], self.__bossSpritesheet))
         
         if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False
@@ -83,7 +83,7 @@ class StageLoader():
         
         while 1:
             self.__clock.tick(FPS)
-            self.__drawBackground(bg_image)
+            self.__drawBackground(convertedBackground)
 
 
             if(player.alive):
@@ -111,4 +111,4 @@ class StageLoader():
                 
             pygame.display.update()
             
-        if(repeatThisStage): self.loadInteractiveStage(category, background, audio, playerPos, enemiesPos, bossPos)
+        if(repeatThisStage): self.loadNormalStage(category, background, audio, playerPos, enemiesPos, bossPos)
