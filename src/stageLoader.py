@@ -79,6 +79,8 @@ class StageLoader():
         if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False
         
+        repeatThisStage = False
+        
         while 1:
             self.__clock.tick(FPS)
             self.__drawBackground(bg_image)
@@ -88,7 +90,7 @@ class StageLoader():
                 player.move(SCREEN_WIDTH, SCREEN_HEIGHT, self.__screen, enemies)
                 if len(enemies) == 0 and player.readyForNextStage: break
             elif(pygame.key.get_pressed()[pygame.K_r]):
-                self.loadInteractiveStage(category, background, audio, playerPos, enemiesPos, bossPos)
+                repeatThisStage = True
                 break
             
             self.__drawHealthBar(player)
@@ -108,3 +110,5 @@ class StageLoader():
                     quit()
                 
             pygame.display.update()
+            
+        if(repeatThisStage): self.loadInteractiveStage(category, background, audio, playerPos, enemiesPos, bossPos)
