@@ -26,7 +26,6 @@ class Enemy(Entity):
             self.frameIndex = 0
             if self.action == enemy_config["ANIM_ATTACK"]:
                 self.attacking = False
-                self.attack_stages = set()
             elif self.action == enemy_config["ANIM_DEATH"]:
                 self.alive = False
                 
