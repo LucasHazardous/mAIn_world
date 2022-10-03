@@ -1,6 +1,5 @@
 import pygame
 from math import inf, sqrt
-from typing import List
 from time import time
 from config import player_config
 from entity.entity import Entity
@@ -29,7 +28,7 @@ class Player(Entity):
         
         self.stagesDealingDamage = set()
         
-    def move(self, screenWidth: int, screenHeight: int, surface: pygame.Surface, enemies: List):
+    def move(self, screenWidth, screenHeight, surface, enemies):
         self.readyForNextStage = False
         self.changeX = 0
         self.changeY = 0
@@ -151,7 +150,7 @@ class Player(Entity):
             target.hit = True
         
         
-    def performAttackIfAllowed(self, key, surface: pygame.Surface, enemies):
+    def performAttackIfAllowed(self, key, surface, enemies):
         if key[pygame.K_w] and not self.attacking:
             self.attacking = True
             self.stagesDealingDamage = set()

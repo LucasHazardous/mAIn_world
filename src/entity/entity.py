@@ -30,7 +30,7 @@ class Entity():
         surface.blit(img, (self.body.x-self.offset[0]*self.imageScale, self.body.y-self.offset[1]*self.imageScale))
         
         
-    def loadImages(self, sprite_sheet: pygame.Surface, animation_steps):
+    def loadImages(self, sprite_sheet, animation_steps):
         animationList = []
         for j, animation in enumerate(animation_steps):
             temporaryAnimationList = []
