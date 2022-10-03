@@ -1,21 +1,21 @@
 import pygame
 from math import inf, sqrt
 from time import time
-from config import player_config
+from config import playerConfig
 from entity.entity import Entity
 
 
 class Player(Entity):
     def __init__(self, x, y, playerSpritesheet, emp):
-        super().__init__(x, y, playerSpritesheet, player_config)
+        super().__init__(x, y, playerSpritesheet, playerConfig)
         self.emp = emp
         self.empUsed = False
         
         self.velX = 1
         self.velY = 0
-        self.baseSpeed = player_config["BASE_SPEED"]
+        self.baseSpeed = playerConfig["BASE_SPEED"]
 
-        self.health = player_config["BASE_HEALTH"]
+        self.health = playerConfig["BASE_HEALTH"]
         
         self.flip = False
         self.running = False
@@ -41,7 +41,7 @@ class Player(Entity):
         
         self.useEmpIfAvailable(key, surface, enemies)
 
-        self.verticalPlayerMovement(key, player_config["VERTICAL_ACCELERATION_LIMIT"])
+        self.verticalPlayerMovement(key, playerConfig["VERTICAL_ACCELERATION_LIMIT"])
         
         self.leftRightBorderLimit(screenWidth)
             
@@ -56,7 +56,7 @@ class Player(Entity):
             self.empUsed = True
             self.emp.body.x = self.body.x
             self.emp.body.y = self.body.y
-            for enemy in enemies: self.attack(screen, enemy, player_config["EMP_DAMAGE"])
+            for enemy in enemies: self.attack(screen, enemy, playerConfig["EMP_DAMAGE"])
         
         if(not self.emp.finished and self.empUsed):
             self.emp.draw(screen)
@@ -75,12 +75,12 @@ class Player(Entity):
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            self.updateAction(player_config["ANIM_DEATH"])
-        elif self.hit: self.updateAction(player_config["ANIM_HIT"])
-        elif self.attacking: self.updateAction(player_config["ANIM_ATTACK"])
-        elif self.jumping: self.updateAction(player_config["ANIM_JUMP"])
-        elif self.running: self.updateAction(player_config["ANIM_RUN"])
-        else: self.updateAction(player_config["ANIM_IDLE"])
+            self.updateAction(playerConfig["ANIM_DEATH"])
+        elif self.hit: self.updateAction(playerConfig["ANIM_HIT"])
+        elif self.attacking: self.updateAction(playerConfig["ANIM_ATTACK"])
+        elif self.jumping: self.updateAction(playerConfig["ANIM_JUMP"])
+        elif self.running: self.updateAction(playerConfig["ANIM_RUN"])
+        else: self.updateAction(playerConfig["ANIM_IDLE"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
@@ -91,16 +91,16 @@ class Player(Entity):
             
         if self.frameIndex >= len(self.animationList[self.action]):
             self.frameIndex = 0
-            if self.action == player_config["ANIM_ATTACK"]:
+            if self.action == playerConfig["ANIM_ATTACK"]:
                 self.attacking = False
-            elif self.action == player_config["ANIM_HIT"]:
+            elif self.action == playerConfig["ANIM_HIT"]:
                 self.attacking = False
                 self.hit = False
             elif self.alive == False:
                 self.frameIndex = len(self.animationList[self.action]) - 1
                 
-        if self.action == player_config["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.stagesDealingDamage:
-            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), player_config["DAMAGE"])
+        if self.action == playerConfig["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.stagesDealingDamage:
+            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), playerConfig["DAMAGE"])
             self.stagesDealingDamage.add(self.frameIndex)
             
      
@@ -122,7 +122,7 @@ class Player(Entity):
         else: self.velX = 1
             
         if(self.velX < limitVelX):
-            self.velX *= player_config["VERTICAL_ACCELERATION"]
+            self.velX *= playerConfig["VERTICAL_ACCELERATION"]
         
 
     def leftRightBorderLimit(self, screenWidth):
@@ -136,10 +136,10 @@ class Player(Entity):
 
     def jumpIfAllowed(self, key):
         if key[pygame.K_SPACE] and not self.jumping:
-            self.velY -= player_config["JUMP_HEIGHT"]
+            self.velY -= playerConfig["JUMP_HEIGHT"]
             self.jumping = True
             
-        self.velY += player_config["GRAVITY"]
+        self.velY += playerConfig["GRAVITY"]
         self.changeY += self.velY
         
 

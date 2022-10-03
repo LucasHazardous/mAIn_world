@@ -1,12 +1,12 @@
 import pygame
 from time import time
-from config import emp_config
+from config import empConfig
 from entity.entity import Entity
 
 class Emp(Entity):
     def __init__(self, x, y, empSpritesheet):
-        super().__init__(x, y, empSpritesheet, emp_config)
-        self.updateAction(emp_config["ANIM_BLAST"])
+        super().__init__(x, y, empSpritesheet, empConfig)
+        self.updateAction(empConfig["ANIM_BLAST"])
         self.finished = False
         
     def updateAnimation(self):

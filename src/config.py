@@ -60,7 +60,7 @@ game_stages = [
     }
 ]
 
-player_config = {
+playerConfig = {
     "ANIMATION_STEPS": [16, 4, 12, 8, 8, 16],
     "ANIM_DEATH": 0,
     "ANIM_HIT": 1,
@@ -85,7 +85,7 @@ player_config = {
     "EMP_DAMAGE": 80
 }
 
-enemy_config = {
+enemyConfig = {
     "ANIMATION_STEPS": [16, 21],
     "ANIM_DEATH": 0,
     "ANIM_ATTACK": 1,
@@ -100,7 +100,7 @@ enemy_config = {
     "BASE_HEALTH": 100
 }
 
-boss_config = {
+bossConfig = {
     "ANIMATION_STEPS": [16, 10, 10],
     "ANIM_DEATH": 0,
     "ANIM_RUN": 1,
@@ -120,7 +120,7 @@ boss_config = {
     "TELEPORT_RANGE": (100, 800)
 }
 
-projectile_config = {
+projectileConfig = {
     "SPEED": 20,
     "ANIMATION_STEPS": [45],
     "SIZE_X": 64,
@@ -135,7 +135,7 @@ projectile_config = {
     "DAMAGE": 20
 }
 
-emp_config = {
+empConfig = {
     "ANIMATION_STEPS": [28],
     "SIZE_X": 96,
     "SIZE_Y": 96,
@@ -149,7 +149,7 @@ emp_config = {
     "DAMAGE": 0
 }
 
-colors_config = {
+colorsConfig = {
     "HEALTHBAR_MAIN": (255, 255, 0),
     "HEALTHBAR_BG": (0, 0, 0)
 }

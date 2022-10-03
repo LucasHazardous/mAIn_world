@@ -1,12 +1,12 @@
 import pygame
 from time import time
-from config import projectile_config
+from config import projectileConfig
 from entity.entity import Entity
 
 class Projectile(Entity):
     def __init__(self, x, y, projectileSpritesheet):
-        super().__init__(x, y, projectileSpritesheet, projectile_config)
-        self.updateAction(projectile_config["ANIM_FLY"])
+        super().__init__(x, y, projectileSpritesheet, projectileConfig)
+        self.updateAction(projectileConfig["ANIM_FLY"])
         
         
     def updateAnimation(self, surface, target):
@@ -20,7 +20,7 @@ class Projectile(Entity):
         if self.frameIndex >= len(self.animationList[self.action]):
             self.frameIndex = 0
             
-        self.body.x -= projectile_config["SPEED"]
+        self.body.x -= projectileConfig["SPEED"]
         self.attackTarget(target)
         
     def goToPosition(self, x, y):
@@ -29,6 +29,6 @@ class Projectile(Entity):
         
     def attackTarget(self, target):
         if self.body.colliderect(target.body):
-            self.body.y = -projectile_config["HITBOX_HEIGHT"]
-            target.health -= projectile_config["DAMAGE"]
+            self.body.y = -projectileConfig["HITBOX_HEIGHT"]
+            target.health -= projectileConfig["DAMAGE"]
             target.hit = True

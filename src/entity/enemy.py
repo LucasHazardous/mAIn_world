@@ -1,19 +1,19 @@
 import pygame
 from time import time
-from config import enemy_config
+from config import enemyConfig
 from entity.entity import Entity
 from entity.projectile import Projectile
 
 class Enemy(Entity):
     def __init__(self, x, y, enemySpritesheet, projectileSpritesheet):
-        super().__init__(x, y, enemySpritesheet, enemy_config)
+        super().__init__(x, y, enemySpritesheet, enemyConfig)
         self.projectile = Projectile(self.body.centerx, self.body.centery, projectileSpritesheet)
         
     def updateAnimation(self, surface, target):
         if self.health <= 0:
             self.health = 0
-            self.updateAction(enemy_config["ANIM_DEATH"])
-        else: self.updateAction(enemy_config["ANIM_ATTACK"])
+            self.updateAction(enemyConfig["ANIM_DEATH"])
+        else: self.updateAction(enemyConfig["ANIM_ATTACK"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
@@ -24,12 +24,12 @@ class Enemy(Entity):
             
         if self.frameIndex >= len(self.animationList[self.action]):
             self.frameIndex = 0
-            if self.action == enemy_config["ANIM_ATTACK"]:
+            if self.action == enemyConfig["ANIM_ATTACK"]:
                 self.attacking = False
-            elif self.action == enemy_config["ANIM_DEATH"]:
+            elif self.action == enemyConfig["ANIM_DEATH"]:
                 self.alive = False
                 
-        if (self.action == enemy_config["ANIM_ATTACK"] and self.frameIndex >= enemy_config["ANIMATION_STEPS"][enemy_config["ANIM_ATTACK"]]-1):
+        if (self.action == enemyConfig["ANIM_ATTACK"] and self.frameIndex >= enemyConfig["ANIMATION_STEPS"][enemyConfig["ANIM_ATTACK"]]-1):
             self.projectile.goToPosition(self.body.centerx, self.body.centery)
             
         self.projectile.updateAnimation(surface, target)

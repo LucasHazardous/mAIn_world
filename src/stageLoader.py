@@ -2,7 +2,7 @@ from entity.player import Player
 from entity.enemy import Enemy
 from entity.emp import Emp
 from entity.boss import Boss
-from config import colors_config
+from config import colorsConfig
 
 import pygame
 from pygame.locals import DOUBLEBUF, HWSURFACE
@@ -46,9 +46,9 @@ class StageLoader():
         
         
     def __drawHealthBar(self, entity):
-        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_BG"], (entity.body.left - 5, entity.body.top - 55, entity.body.width+10, 40))
+        pygame.draw.rect(self.__screen, colorsConfig["HEALTHBAR_BG"], (entity.body.left - 5, entity.body.top - 55, entity.body.width+10, 40))
         ratio = entity.health / entity.baseHealth
-        pygame.draw.rect(self.__screen, colors_config["HEALTHBAR_MAIN"], (entity.body.left, entity.body.top-50, entity.body.width * ratio, 30))
+        pygame.draw.rect(self.__screen, colorsConfig["HEALTHBAR_MAIN"], (entity.body.left, entity.body.top-50, entity.body.width * ratio, 30))
 
 
     def playCutscene(self, category, audio, background):

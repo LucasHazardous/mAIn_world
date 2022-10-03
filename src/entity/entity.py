@@ -2,8 +2,8 @@ from time import time
 import pygame
 
 class Entity():
-    def __init__(self, x, y, entitySpritesheet, entity_config):
-        self.baseHealth = entity_config["BASE_HEALTH"]
+    def __init__(self, x, y, entitySpritesheet, entityConfig):
+        self.baseHealth = entityConfig["BASE_HEALTH"]
         self.health = self.baseHealth
         
         self.alive = True
@@ -11,17 +11,17 @@ class Entity():
         self.attacking = False
         
         self.lastAnimationUpdateTime = pygame.time.get_ticks()
-        self.animationCooldown = entity_config["ANIMATION_COOLDOWN"]
-        self.sizeX = entity_config["SIZE_X"]
-        self.sizeY = entity_config["SIZE_Y"]
-        self.offset = entity_config["OFFSET"]
+        self.animationCooldown = entityConfig["ANIMATION_COOLDOWN"]
+        self.sizeX = entityConfig["SIZE_X"]
+        self.sizeY = entityConfig["SIZE_Y"]
+        self.offset = entityConfig["OFFSET"]
         
-        self.body = pygame.Rect((x, y, entity_config["HITBOX_WIDTH"], entity_config["HITBOX_HEIGHT"]))
-        self.imageScale = entity_config["SCALE"]
+        self.body = pygame.Rect((x, y, entityConfig["HITBOX_WIDTH"], entityConfig["HITBOX_HEIGHT"]))
+        self.imageScale = entityConfig["SCALE"]
         self.action = 0
         self.frameIndex = 0
         
-        self.animationList = self.loadImages(entitySpritesheet, entity_config["ANIMATION_STEPS"])
+        self.animationList = self.loadImages(entitySpritesheet, entityConfig["ANIMATION_STEPS"])
     
         self.image = self.animationList[self.action][self.frameIndex]
     
