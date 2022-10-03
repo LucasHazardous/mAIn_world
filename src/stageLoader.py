@@ -26,13 +26,13 @@ class StageLoader():
         
         self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), self.flags, DEPTH)
 
-        self.__player_spritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
-        self.__enemy_spritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
+        self.__playerSpritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
+        self.__enemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
         self.__projectile = pygame.image.load(SPRITESHEET_PATH + "projectile.png").convert_alpha()
-        self.__emp_spritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
-        self.__boss_spritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
+        self.__empSpritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
+        self.__bossSpritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
         
-        self.__emp = Emp(0, 0, self.__emp_spritesheet)
+        self.__emp = Emp(0, 0, self.__empSpritesheet)
 
     def __playAudio(self, audioPath, loop=-1):
         pygame.mixer.music.load(audioPath)
@@ -69,12 +69,12 @@ class StageLoader():
     def loadInteractiveStage(self, category, background, audio, playerPos, enemiesPos=None, bossPos=None):
         bg_image = pygame.image.load(background).convert()
         
-        player = Player(playerPos[0], playerPos[1], self.__player_spritesheet, self.__emp)
+        player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
         
         if category == "normal":
-            enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemy_spritesheet, self.__projectile) for enemyPos in enemiesPos]
+            enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
         else:
-            enemies = [Boss(bossPos[0], bossPos[1], self.__boss_spritesheet)]
+            enemies = [Boss(bossPos[0], bossPos[1], self.__bossSpritesheet)]
         
         if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False

@@ -7,8 +7,8 @@ from entity.entity import Entity
 
 
 class Player(Entity):
-    def __init__(self, x, y, player_spritesheet, emp):
-        super().__init__(x, y, player_spritesheet, player_config)
+    def __init__(self, x, y, playerSpritesheet, emp):
+        super().__init__(x, y, playerSpritesheet, player_config)
         self.emp = emp
         self.empUsed = False
         

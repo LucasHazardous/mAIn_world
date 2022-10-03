@@ -5,9 +5,9 @@ from entity.entity import Entity
 from entity.projectile import Projectile
 
 class Enemy(Entity):
-    def __init__(self, x, y, enemy_spritesheet, projectile_spritesheet):
-        super().__init__(x, y, enemy_spritesheet, enemy_config)
-        self.projectile = Projectile(self.body.centerx, self.body.centery, projectile_spritesheet)
+    def __init__(self, x, y, enemySpritesheet, projectileSpritesheet):
+        super().__init__(x, y, enemySpritesheet, enemy_config)
+        self.projectile = Projectile(self.body.centerx, self.body.centery, projectileSpritesheet)
         
     def updateAnimation(self, surface, target):
         if self.health <= 0:

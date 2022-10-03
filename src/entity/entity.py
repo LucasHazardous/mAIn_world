@@ -2,7 +2,7 @@ from time import time
 import pygame
 
 class Entity():
-    def __init__(self, x, y, entity_spritesheet, entity_config):
+    def __init__(self, x, y, entitySpritesheet, entity_config):
         self.baseHealth = entity_config["BASE_HEALTH"]
         self.health = self.baseHealth
         
@@ -21,7 +21,7 @@ class Entity():
         self.action = 0
         self.frameIndex = 0
         
-        self.animationList = self.loadImages(entity_spritesheet, entity_config["ANIMATION_STEPS"])
+        self.animationList = self.loadImages(entitySpritesheet, entity_config["ANIMATION_STEPS"])
     
         self.image = self.animationList[self.action][self.frameIndex]
     

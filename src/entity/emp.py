@@ -4,8 +4,8 @@ from config import emp_config
 from entity.entity import Entity
 
 class Emp(Entity):
-    def __init__(self, x, y, emp_spritesheet):
-        super().__init__(x, y, emp_spritesheet, emp_config)
+    def __init__(self, x, y, empSpritesheet):
+        super().__init__(x, y, empSpritesheet, emp_config)
         self.updateAction(emp_config["ANIM_BLAST"])
         self.finished = False
         
