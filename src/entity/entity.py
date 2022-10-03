@@ -30,19 +30,19 @@ class Entity():
         surface.blit(img, (self.body.x-self.offset[0]*self.imageScale, self.body.y-self.offset[1]*self.imageScale))
         
         
-    def loadImages(self, sprite_sheet, animation_steps):
+    def loadImages(self, spritesheet, animationSeps):
         animationList = []
-        for j, animation in enumerate(animation_steps):
+        for j, animation in enumerate(animationSeps):
             temporaryAnimationList = []
             for i in range(animation):
-                temp_img = sprite_sheet.subsurface(i*self.sizeX, j*self.sizeY, self.sizeX, self.sizeY)
-                temporaryAnimationList.append(pygame.transform.scale(temp_img, (self.sizeX*self.imageScale, self.sizeY*self.imageScale)))
+                tempImg = spritesheet.subsurface(i*self.sizeX, j*self.sizeY, self.sizeX, self.sizeY)
+                temporaryAnimationList.append(pygame.transform.scale(tempImg, (self.sizeX*self.imageScale, self.sizeY*self.imageScale)))
             animationList.append(temporaryAnimationList)
         return animationList
     
     
-    def updateAction(self, new_action):
-        if new_action != self.action:
-            self.action = new_action
+    def updateAction(self, newAction):
+        if newAction != self.action:
+            self.action = newAction
             self.frameIndex = 0
             self.lastAnimationUpdateTime = pygame.time.get_ticks()
