@@ -9,12 +9,12 @@ class Boss(Entity):
         super().__init__(x, y, boss_spritesheet, boss_config)
         
     def updateAnimation(self, surface, player):
-        attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)
+        attackRange = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)
         
         if self.health <= 0:
             self.health = 0
             self.updateAction(boss_config["ANIM_DEATH"])
-        elif (attack_range.colliderect(player.body)): self.updateAction(boss_config["ANIM_DASH"])
+        elif (attackRange.colliderect(player.body)): self.updateAction(boss_config["ANIM_DASH"])
         else: self.updateAction(boss_config["ANIM_RUN"])
         
         current = pygame.time.get_ticks()
@@ -25,7 +25,7 @@ class Boss(Entity):
             self.lastAnimationUpdateTime = current
             
         if self.action == boss_config["ANIM_DASH"] and self.frameIndex == boss_config["ANIM_DASH_ATTACK_FRAME"]:
-                if(attack_range.colliderect(player.body)):
+                if(attackRange.colliderect(player.body)):
                     player.health -= boss_config["DAMAGE"]
                     player.hit = True
                     self.frameIndex += 1
