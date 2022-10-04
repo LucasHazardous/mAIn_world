@@ -14,15 +14,11 @@ class Player(Entity):
         self.velX = 1
         self.velY = 0
         self.baseSpeed = playerConfig["BASE_SPEED"]
-
-        self.health = playerConfig["BASE_HEALTH"]
         
         self.flip = False
         self.running = False
         self.jumping = False
-        self.attacking = False
         self.hit = False
-        self.alive = True
         
         self.readyForNextStage = False
         
