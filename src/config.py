@@ -1,3 +1,11 @@
+gameSettings = {
+    "SCREEN_WIDTH": 1000,
+    "SCREEN_HEIGHT": 600,
+    "FPS": 60,
+    "DEPTH": 24,
+    "SPRITESHEET_PATH": "./assets/images/entities/"
+}
+
 gameStages = [
     {
         "category": "cutscene",

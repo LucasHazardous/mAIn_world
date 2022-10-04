@@ -2,17 +2,16 @@ from entity.player import Player
 from entity.enemy import Enemy
 from entity.emp import Emp
 from entity.boss import Boss
-from config import colorsConfig
+from config import colorsConfig, gameSettings
 
 import pygame
 from pygame.locals import DOUBLEBUF, HWSURFACE
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 600
-FPS = 60
-DEPTH = 24
-
-SPRITESHEET_PATH = "./assets/images/entities/"
+SCREEN_WIDTH = gameSettings["SCREEN_WIDTH"]
+SCREEN_HEIGHT = gameSettings["SCREEN_HEIGHT"]
+FPS = gameSettings["FPS"]
+DEPTH = gameSettings["DEPTH"]
+SPRITESHEET_PATH = gameSettings["SPRITESHEET_PATH"]
 
 class StageLoader():
     def __init__(self):
