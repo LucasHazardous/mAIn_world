@@ -20,11 +20,11 @@ class StageLoader():
         
         pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
         
-        self.flags = DOUBLEBUF | HWSURFACE
+        flags = DOUBLEBUF | HWSURFACE
         
         self.__clock = pygame.time.Clock()
         
-        self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), self.flags, DEPTH)
+        self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, DEPTH)
 
         self.__playerSpritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
         self.__enemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
