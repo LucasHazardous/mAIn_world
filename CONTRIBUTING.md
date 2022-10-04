@@ -23,6 +23,10 @@ We use github to host code, to track issues and feature requests, as well as acc
 ## Use a Consistent Coding Style
 
 * 4 spaces for indentation
+* camelCase for variables' names
+* use correct access modifiers in classes for methods
+* place imports at the top
+* create constants in config.py file
 
 ## License
 By contributing, you agree that your contributions will be licensed under GNU GENERAL PUBLIC LICENSE Version 3.
