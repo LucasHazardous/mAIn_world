@@ -35,28 +35,28 @@ class Player(Entity):
         self.running = False
         key = pygame.key.get_pressed()
         
-        self.jumpIfAllowed(key)
+        self.__jumpIfAllowed(key)
         
-        self.performAttackIfAllowed(key, surface, enemies)
+        self.__performAttackIfAllowed(key, surface, enemies)
         
-        self.useEmpIfAvailable(key, surface, enemies)
+        self.__useEmpIfAvailable(key, surface, enemies)
 
-        self.verticalPlayerMovement(key, playerConfig["VERTICAL_ACCELERATION_LIMIT"])
+        self.__verticalPlayerMovement(key, playerConfig["VERTICAL_ACCELERATION_LIMIT"])
         
-        self.leftRightBorderLimit(screenWidth)
+        self.__leftRightBorderLimit(screenWidth)
             
-        self.groundLimit(screenHeight)
+        self.__groundLimit(screenHeight)
             
         self.body.x += self.changeX
         self.body.y += self.changeY
         
     
-    def useEmpIfAvailable(self, key, screen, enemies):
+    def __useEmpIfAvailable(self, key, screen, enemies):
         if(not self.empUsed and key[pygame.K_s]):
             self.empUsed = True
             self.emp.body.x = self.body.x
             self.emp.body.y = self.body.y
-            for enemy in enemies: self.attack(screen, enemy, playerConfig["EMP_DAMAGE"])
+            for enemy in enemies: self.__attack(screen, enemy, playerConfig["EMP_DAMAGE"])
         
         if(not self.emp.finished and self.empUsed):
             self.emp.draw(screen)
@@ -64,7 +64,7 @@ class Player(Entity):
             self.empUsed = True
         
         
-    def groundLimit(self, screenHeight):
+    def __groundLimit(self, screenHeight):
         if self.body.bottom + self.changeY > screenHeight - 50:
             self.velY = 0
             self.jumping = False
@@ -75,12 +75,12 @@ class Player(Entity):
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            self.updateAction(playerConfig["ANIM_DEATH"])
-        elif self.hit: self.updateAction(playerConfig["ANIM_HIT"])
-        elif self.attacking: self.updateAction(playerConfig["ANIM_ATTACK"])
-        elif self.jumping: self.updateAction(playerConfig["ANIM_JUMP"])
-        elif self.running: self.updateAction(playerConfig["ANIM_RUN"])
-        else: self.updateAction(playerConfig["ANIM_IDLE"])
+            self._updateAction(playerConfig["ANIM_DEATH"])
+        elif self.hit: self._updateAction(playerConfig["ANIM_HIT"])
+        elif self.attacking: self._updateAction(playerConfig["ANIM_ATTACK"])
+        elif self.jumping: self._updateAction(playerConfig["ANIM_JUMP"])
+        elif self.running: self._updateAction(playerConfig["ANIM_RUN"])
+        else: self._updateAction(playerConfig["ANIM_IDLE"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
@@ -100,11 +100,11 @@ class Player(Entity):
                 self.frameIndex = len(self.animationList[self.action]) - 1
                 
         if self.action == playerConfig["ANIM_ATTACK"] and self.frameIndex % 4 == 0 and self.frameIndex not in self.stagesDealingDamage:
-            if(len(enemies) > 0): self.attack(surface, self.getClosetEnemy(enemies), playerConfig["DAMAGE"])
+            if(len(enemies) > 0): self.__attack(surface, self.__getClosetEnemy(enemies), playerConfig["DAMAGE"])
             self.stagesDealingDamage.add(self.frameIndex)
             
      
-    def verticalPlayerMovement(self, key, limitVelX):
+    def __verticalPlayerMovement(self, key, limitVelX):
         if key[pygame.K_a]:
             if(not self.flip): self.velX = 1
             self.changeX = 1-self.baseSpeed - self.velX / 100
@@ -125,7 +125,7 @@ class Player(Entity):
             self.velX *= playerConfig["VERTICAL_ACCELERATION"]
         
 
-    def leftRightBorderLimit(self, screenWidth):
+    def __leftRightBorderLimit(self, screenWidth):
         if self.body.left + self.changeX < 0:
             self.changeX = 0 - self.body.left
             
@@ -134,7 +134,7 @@ class Player(Entity):
             self.readyForNextStage = True
 
 
-    def jumpIfAllowed(self, key):
+    def __jumpIfAllowed(self, key):
         if key[pygame.K_SPACE] and not self.jumping:
             self.velY -= playerConfig["JUMP_HEIGHT"]
             self.jumping = True
@@ -143,20 +143,20 @@ class Player(Entity):
         self.changeY += self.velY
         
 
-    def attack(self, surface, target, damage):
+    def __attack(self, surface, target, damage):
         attackRange = pygame.Rect(self.body.centerx - self.body.width, self.body.top, self.body.width*2, self.body.height)
         if attackRange.colliderect(target.body):
             target.health -= damage
             target.hit = True
         
         
-    def performAttackIfAllowed(self, key, surface, enemies):
+    def __performAttackIfAllowed(self, key, surface, enemies):
         if key[pygame.K_w] and not self.attacking:
             self.attacking = True
             self.stagesDealingDamage = set()
         
         
-    def getClosetEnemy(self, enemies):
+    def __getClosetEnemy(self, enemies):
         minDistance = inf
         closetEnemy = None
         for enemy in enemies:

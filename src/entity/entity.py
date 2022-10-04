@@ -21,7 +21,7 @@ class Entity():
         self.action = 0
         self.frameIndex = 0
         
-        self.animationList = self.loadImages(entitySpritesheet, entityConfig["ANIMATION_STEPS"])
+        self.animationList = self.__loadImages(entitySpritesheet, entityConfig["ANIMATION_STEPS"])
     
         self.image = self.animationList[self.action][self.frameIndex]
     
@@ -30,7 +30,7 @@ class Entity():
         surface.blit(img, (self.body.x-self.offset[0]*self.imageScale, self.body.y-self.offset[1]*self.imageScale))
         
         
-    def loadImages(self, spritesheet, animationSeps):
+    def __loadImages(self, spritesheet, animationSeps):
         animationList = []
         for j, animation in enumerate(animationSeps):
             temporaryAnimationList = []
@@ -41,7 +41,7 @@ class Entity():
         return animationList
     
     
-    def updateAction(self, newAction):
+    def _updateAction(self, newAction):
         if newAction != self.action:
             self.action = newAction
             self.frameIndex = 0

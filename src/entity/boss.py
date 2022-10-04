@@ -13,9 +13,9 @@ class Boss(Entity):
         
         if self.health <= 0:
             self.health = 0
-            self.updateAction(bossConfig["ANIM_DEATH"])
-        elif (attackRange.colliderect(player.body)): self.updateAction(bossConfig["ANIM_DASH"])
-        else: self.updateAction(bossConfig["ANIM_RUN"])
+            self._updateAction(bossConfig["ANIM_DEATH"])
+        elif (attackRange.colliderect(player.body)): self._updateAction(bossConfig["ANIM_DASH"])
+        else: self._updateAction(bossConfig["ANIM_RUN"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
@@ -36,9 +36,9 @@ class Boss(Entity):
             if self.action == bossConfig["ANIM_DEATH"]:
                 self.alive = False
 
-        if(self.action == bossConfig["ANIM_RUN"]): self.moveCloserToPlayer(player)
+        if(self.action == bossConfig["ANIM_RUN"]): self.__moveCloserToPlayer(player)
 
-    def moveCloserToPlayer(self, player):
+    def __moveCloserToPlayer(self, player):
         if(player.body.centerx > self.body.centerx):
             self.body.x += bossConfig["SPEED"]
             self.flip = False

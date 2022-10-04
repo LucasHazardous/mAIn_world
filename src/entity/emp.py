@@ -6,7 +6,7 @@ from entity.entity import Entity
 class Emp(Entity):
     def __init__(self, x, y, empSpritesheet):
         super().__init__(x, y, empSpritesheet, empConfig)
-        self.updateAction(empConfig["ANIM_BLAST"])
+        self._updateAction(empConfig["ANIM_BLAST"])
         self.finished = False
         
     def updateAnimation(self):

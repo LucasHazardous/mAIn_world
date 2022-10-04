@@ -12,8 +12,8 @@ class Enemy(Entity):
     def updateAnimation(self, surface, target):
         if self.health <= 0:
             self.health = 0
-            self.updateAction(enemyConfig["ANIM_DEATH"])
-        else: self.updateAction(enemyConfig["ANIM_ATTACK"])
+            self._updateAction(enemyConfig["ANIM_DEATH"])
+        else: self._updateAction(enemyConfig["ANIM_ATTACK"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
