@@ -40,9 +40,9 @@ class StageLoader():
         pygame.mixer.music.play(loop, 0.0, 5000)
 
 
-    def __drawBackground(self, bg_image):
-        scaled_bg = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.__screen.blit(scaled_bg, (0,0))
+    def __drawBackground(self, background):
+        scaledBackground = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.__screen.blit(scaledBackground, (0,0))
         
         
     def __drawHealthBar(self, entity):
