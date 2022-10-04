@@ -1,47 +1,47 @@
 import pygame
 from time import time
-from config import boss_config
+from config import bossConfig
 from entity.entity import Entity
 from random import randrange
 
 class Boss(Entity):
-    def __init__(self, x, y, boss_spritesheet):
-        super().__init__(x, y, boss_spritesheet, boss_config)
+    def __init__(self, x, y, bossSpritesheet):
+        super().__init__(x, y, bossSpritesheet, bossConfig)
         
     def updateAnimation(self, surface, player):
-        attack_range = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)
+        attackRange = pygame.Rect(self.body.centerx - self.body.width, self.body.top - self.body.height, self.body.width*2, self.body.height * 2)
         
         if self.health <= 0:
             self.health = 0
-            self.updateAction(boss_config["ANIM_DEATH"])
-        elif (attack_range.colliderect(player.body)): self.updateAction(boss_config["ANIM_DASH"])
-        else: self.updateAction(boss_config["ANIM_RUN"])
+            self._updateAction(bossConfig["ANIM_DEATH"])
+        elif (attackRange.colliderect(player.body)): self._updateAction(bossConfig["ANIM_DASH"])
+        else: self._updateAction(bossConfig["ANIM_RUN"])
         
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.action == boss_config["ANIM_DASH"] and self.frame_index == boss_config["ANIM_DASH_ATTACK_FRAME"]:
-                if(attack_range.colliderect(player.body)):
-                    player.health -= boss_config["DAMAGE"]
+        if self.action == bossConfig["ANIM_DASH"] and self.frameIndex == bossConfig["ANIM_DASH_ATTACK_FRAME"]:
+                if(attackRange.colliderect(player.body)):
+                    player.health -= bossConfig["DAMAGE"]
                     player.hit = True
-                    self.frame_index += 1
-                    self.body.x = randrange(boss_config["TELEPORT_RANGE"][0], boss_config["TELEPORT_RANGE"][1])
+                    self.frameIndex += 1
+                    self.body.x = randrange(bossConfig["TELEPORT_RANGE"][0], bossConfig["TELEPORT_RANGE"][1])
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
-            if self.action == boss_config["ANIM_DEATH"]:
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
+            if self.action == bossConfig["ANIM_DEATH"]:
                 self.alive = False
 
-        if(self.action == boss_config["ANIM_RUN"]): self.moveCloserToPlayer(player)
+        if(self.action == bossConfig["ANIM_RUN"]): self.__moveCloserToPlayer(player)
 
-    def moveCloserToPlayer(self, player):
+    def __moveCloserToPlayer(self, player):
         if(player.body.centerx > self.body.centerx):
-            self.body.x += boss_config["SPEED"]
+            self.body.x += bossConfig["SPEED"]
             self.flip = False
         elif(player.body.centerx < self.body.centerx):
-            self.body.x -= boss_config["SPEED"]
+            self.body.x -= bossConfig["SPEED"]
             self.flip = True

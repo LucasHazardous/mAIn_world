@@ -1,22 +1,22 @@
 import pygame
 from time import time
-from config import emp_config
+from config import empConfig
 from entity.entity import Entity
 
 class Emp(Entity):
-    def __init__(self, x, y, emp_spritesheet):
-        super().__init__(x, y, emp_spritesheet, emp_config)
-        self.updateAction(emp_config["ANIM_BLAST"])
+    def __init__(self, x, y, empSpritesheet):
+        super().__init__(x, y, empSpritesheet, empConfig)
+        self._updateAction(empConfig["ANIM_BLAST"])
         self.finished = False
         
     def updateAnimation(self):
         current = pygame.time.get_ticks()
-        self.image = self.animation_list[self.action][self.frame_index]
+        self.image = self.animationList[self.action][self.frameIndex]
         
-        if current - self.last_animation_update_time > self.animation_cooldown:
-            self.frame_index += 1
-            self.last_animation_update_time = current
+        if current - self.lastAnimationUpdateTime > self.animationCooldown:
+            self.frameIndex += 1
+            self.lastAnimationUpdateTime = current
             
-        if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
+        if self.frameIndex >= len(self.animationList[self.action]):
+            self.frameIndex = 0
             self.finished = True
