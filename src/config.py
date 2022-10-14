@@ -104,7 +104,6 @@ shootingEnemyConfig = {
     "ANIMATION_COOLDOWN": 50,
     "HITBOX_WIDTH": 80,
     "HITBOX_HEIGHT": 180,
-    "BASE_SPEED": 5,
     "BASE_HEALTH": 100
 }
 
