@@ -26,7 +26,7 @@ class StageLoader():
         self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, DEPTH)
 
         self.__playerSpritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
-        self.__enemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "enemy.png").convert_alpha()
+        self.__shootingEnemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "shootingEnemy.png").convert_alpha()
         self.__projectile = pygame.image.load(SPRITESHEET_PATH + "projectile.png").convert_alpha()
         self.__empSpritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
         self.__bossSpritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
@@ -70,7 +70,7 @@ class StageLoader():
         
         player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
         
-        enemies = [ShootingEnemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
+        enemies = [ShootingEnemy(enemyPos[0], enemyPos[1], self.__shootingEnemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
         
         if(bossPos != None):
             enemies.append(Boss(bossPos[0], bossPos[1], self.__bossSpritesheet))
