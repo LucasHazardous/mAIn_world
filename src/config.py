@@ -16,35 +16,32 @@ gameStages = [
         "category": "normal",
         "background": "./assets/images/stages/abandoned1.png",
         "audio": "",
-        "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/abandoned2.png",
         "audio": "./assets/audio/cyber-attack.mp3",
-        "enemiesPos": [(600, 380), (800, 380)],
+        "shootingEnemiesPos": [(600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/park.png",
         "audio": "./assets/audio/80s-synth-wave.mp3",
-        "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/building.png",
         "audio": "./assets/audio/cyber-attack.mp3",
-        "enemiesPos": [(500, 380), (600, 380), (800, 380)],
+        "shootingEnemiesPos": [(500, 380), (600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/lobby.png",
         "audio": "./assets/audio/trap-auto-drift-sport.mp3",
-        "enemiesPos": [],
         "playerPos": (50, 380)
     },
     {
@@ -105,6 +102,22 @@ shootingEnemyConfig = {
     "HITBOX_WIDTH": 80,
     "HITBOX_HEIGHT": 180,
     "BASE_HEALTH": 100
+}
+
+walkingEnemyConfig = {
+    "ANIMATION_STEPS": [5],
+    "ANIM_WALK": 0,
+    "SIZE_X": 82,
+    "SIZE_Y": 104,
+    "SCALE": 2,
+    "OFFSET": [10, 10],
+    "ANIMATION_COOLDOWN": 50,
+    "HITBOX_WIDTH": 120,
+    "HITBOX_HEIGHT": 180,
+    "BASE_HEALTH": 200,
+    "SPEED": 2,
+    "ATTACK_WIDTH": 10,
+    "DAMAGE": 1
 }
 
 bossConfig = {
