@@ -93,7 +93,7 @@ playerConfig = {
     "EMP_DAMAGE": 80
 }
 
-enemyConfig = {
+shootingEnemyConfig = {
     "ANIMATION_STEPS": [16, 21],
     "ANIM_DEATH": 0,
     "ANIM_ATTACK": 1,
