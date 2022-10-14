@@ -107,6 +107,22 @@ shootingEnemyConfig = {
     "BASE_HEALTH": 100
 }
 
+walkingEnemyConfig = {
+    "ANIMATION_STEPS": [5],
+    "ANIM_WALK": 0,
+    "SIZE_X": 82,
+    "SIZE_Y": 104,
+    "SCALE": 2,
+    "OFFSET": [10, 10],
+    "ANIMATION_COOLDOWN": 50,
+    "HITBOX_WIDTH": 120,
+    "HITBOX_HEIGHT": 180,
+    "BASE_HEALTH": 200,
+    "SPEED": 2,
+    "ATTACK_WIDTH": 10,
+    "DAMAGE": 1
+}
+
 bossConfig = {
     "ANIMATION_STEPS": [16, 10, 10],
     "ANIM_DEATH": 0,
