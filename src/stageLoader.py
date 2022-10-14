@@ -1,5 +1,6 @@
 from entity.player import Player
 from entity.enemy.shootingEnemy import ShootingEnemy
+from entity.enemy.walkingEnemy import WalkingEnemy
 from entity.emp import Emp
 from entity.enemy.boss import Boss
 from config import colorsConfig, gameSettings
@@ -30,6 +31,7 @@ class StageLoader():
         self.__projectile = pygame.image.load(SPRITESHEET_PATH + "projectile.png").convert_alpha()
         self.__empSpritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
         self.__bossSpritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
+        self.__walkingEnemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "walkingEnemy.png").convert_alpha()
         
         self.__emp = Emp(0, 0, self.__empSpritesheet)
 
@@ -65,12 +67,18 @@ class StageLoader():
                     quit()
 
 
-    def loadNormalStage(self, category, background, audio, playerPos, enemiesPos=[], bossPos=None):
+    def loadNormalStage(self, category, background, audio, playerPos, shootingEnemiesPos=[], walkingEnemiesPos=[], bossPos=None):
         convertedBackground = pygame.image.load(background).convert()
         
         player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
         
-        enemies = [ShootingEnemy(enemyPos[0], enemyPos[1], self.__shootingEnemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
+        enemies = []
+        
+        for enemyPos in shootingEnemiesPos:
+            enemies.append(ShootingEnemy(enemyPos[0], enemyPos[1], self.__shootingEnemySpritesheet, self.__projectile))
+            
+        for enemyPos in walkingEnemiesPos:
+            enemies.append(WalkingEnemy(enemyPos[0], enemyPos[1], self.__walkingEnemySpritesheet))
         
         if(bossPos != None):
             enemies.append(Boss(bossPos[0], bossPos[1], self.__bossSpritesheet))
@@ -110,4 +118,4 @@ class StageLoader():
                 
             pygame.display.update()
             
-        if(repeatThisStage): self.loadNormalStage(category, background, audio, playerPos, enemiesPos, bossPos)
+        if(repeatThisStage): self.loadNormalStage(category, background, audio, playerPos, shootingEnemiesPos, walkingEnemiesPos, bossPos)
