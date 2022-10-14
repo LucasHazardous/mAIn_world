@@ -2,9 +2,9 @@ import pygame
 from time import time
 from config import enemyConfig
 from entity.entity import Entity
-from entity.projectile import Projectile
+from entity.enemy.projectile import Projectile
 
-class Enemy(Entity):
+class ShootingEnemy(Entity):
     def __init__(self, x, y, enemySpritesheet, projectileSpritesheet):
         super().__init__(x, y, enemySpritesheet, enemyConfig)
         self.projectile = Projectile(self.body.centerx, self.body.centery, projectileSpritesheet)

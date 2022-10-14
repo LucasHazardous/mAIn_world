@@ -1,7 +1,7 @@
 from entity.player import Player
-from entity.enemy import Enemy
+from entity.enemy.shootingEnemy import ShootingEnemy
 from entity.emp import Emp
-from entity.boss import Boss
+from entity.enemy.boss import Boss
 from config import colorsConfig, gameSettings
 
 import pygame
@@ -70,7 +70,7 @@ class StageLoader():
         
         player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
         
-        enemies = [Enemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
+        enemies = [ShootingEnemy(enemyPos[0], enemyPos[1], self.__enemySpritesheet, self.__projectile) for enemyPos in enemiesPos]
         
         if(bossPos != None):
             enemies.append(Boss(bossPos[0], bossPos[1], self.__bossSpritesheet))
