@@ -60,8 +60,34 @@ gameStages = [
         "category": "normal",
         "background": "./assets/images/stages/exit.png",
         "audio": "./assets/audio/endless-party.mp3",
-        "enemiesPos": [],
         "playerPos": (50, 380)
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/tunnel.png",
+        "audio": "./assets/audio/no-limits.mp3",
+        "playerPos": (50, 380),
+        "walkingEnemiesPos": [(700, 380)]
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/junkyard.png",
+        "audio": "./assets/audio/no-limits.mp3",
+        "playerPos": (50, 380),
+        "walkingEnemiesPos": [(0, 380), (700, 380)],
+        "shootingEnemiesPos": [(200, 380)]
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/boss-dialogue2.mp3",
+        "background": "./assets/images/stages/boss-meeting2.jpg"
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/highway.png",
+        "audio": "./assets/audio/cinematic-metal.mp3",
+        "bossPos": (700, 380),
+        "playerPos": (200, 380)
     }
 ]
 
