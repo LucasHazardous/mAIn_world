@@ -16,35 +16,32 @@ gameStages = [
         "category": "normal",
         "background": "./assets/images/stages/abandoned1.png",
         "audio": "",
-        "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/abandoned2.png",
         "audio": "./assets/audio/cyber-attack.mp3",
-        "enemiesPos": [(600, 380), (800, 380)],
+        "shootingEnemiesPos": [(600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/park.png",
         "audio": "./assets/audio/80s-synth-wave.mp3",
-        "enemiesPos": [],
         "playerPos": (100, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/building.png",
         "audio": "./assets/audio/cyber-attack.mp3",
-        "enemiesPos": [(500, 380), (600, 380), (800, 380)],
+        "shootingEnemiesPos": [(500, 380), (600, 380), (800, 380)],
         "playerPos": (50, 380)
     },
     {
         "category": "normal",
         "background": "./assets/images/stages/lobby.png",
         "audio": "./assets/audio/trap-auto-drift-sport.mp3",
-        "enemiesPos": [],
         "playerPos": (50, 380)
     },
     {
@@ -63,8 +60,34 @@ gameStages = [
         "category": "normal",
         "background": "./assets/images/stages/exit.png",
         "audio": "./assets/audio/endless-party.mp3",
-        "enemiesPos": [],
         "playerPos": (50, 380)
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/tunnel.png",
+        "audio": "./assets/audio/no-limits.mp3",
+        "playerPos": (50, 380),
+        "walkingEnemiesPos": [(700, 380)]
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/junkyard.png",
+        "audio": "./assets/audio/no-limits.mp3",
+        "playerPos": (50, 380),
+        "walkingEnemiesPos": [(0, 380), (700, 380)],
+        "shootingEnemiesPos": [(200, 380)]
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/boss-dialogue2.mp3",
+        "background": "./assets/images/stages/boss-meeting2.jpg"
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/highway.png",
+        "audio": "./assets/audio/cinematic-metal.mp3",
+        "bossPos": (700, 380),
+        "playerPos": (200, 380)
     }
 ]
 
@@ -93,7 +116,7 @@ playerConfig = {
     "EMP_DAMAGE": 80
 }
 
-enemyConfig = {
+shootingEnemyConfig = {
     "ANIMATION_STEPS": [16, 21],
     "ANIM_DEATH": 0,
     "ANIM_ATTACK": 1,
@@ -104,8 +127,23 @@ enemyConfig = {
     "ANIMATION_COOLDOWN": 50,
     "HITBOX_WIDTH": 80,
     "HITBOX_HEIGHT": 180,
-    "BASE_SPEED": 5,
     "BASE_HEALTH": 100
+}
+
+walkingEnemyConfig = {
+    "ANIMATION_STEPS": [5],
+    "ANIM_WALK": 0,
+    "SIZE_X": 82,
+    "SIZE_Y": 104,
+    "SCALE": 2,
+    "OFFSET": [10, 10],
+    "ANIMATION_COOLDOWN": 50,
+    "HITBOX_WIDTH": 120,
+    "HITBOX_HEIGHT": 180,
+    "BASE_HEALTH": 200,
+    "SPEED": 2,
+    "ATTACK_WIDTH": 10,
+    "DAMAGE": 1
 }
 
 bossConfig = {

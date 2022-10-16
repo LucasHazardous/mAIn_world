@@ -1,19 +1,19 @@
 import pygame
 from time import time
-from config import enemyConfig
+from config import shootingEnemyConfig
 from entity.entity import Entity
-from entity.projectile import Projectile
+from entity.enemy.projectile import Projectile
 
-class Enemy(Entity):
+class ShootingEnemy(Entity):
     def __init__(self, x, y, enemySpritesheet, projectileSpritesheet):
-        super().__init__(x, y, enemySpritesheet, enemyConfig)
+        super().__init__(x, y, enemySpritesheet, shootingEnemyConfig)
         self.projectile = Projectile(self.body.centerx, self.body.centery, projectileSpritesheet)
         
     def updateAnimation(self, surface, target):
         if self.health <= 0:
             self.health = 0
-            self._updateAction(enemyConfig["ANIM_DEATH"])
-        else: self._updateAction(enemyConfig["ANIM_ATTACK"])
+            self._updateAction(shootingEnemyConfig["ANIM_DEATH"])
+        else: self._updateAction(shootingEnemyConfig["ANIM_ATTACK"])
         
         current = pygame.time.get_ticks()
         self.image = self.animationList[self.action][self.frameIndex]
@@ -24,12 +24,12 @@ class Enemy(Entity):
             
         if self.frameIndex >= len(self.animationList[self.action]):
             self.frameIndex = 0
-            if self.action == enemyConfig["ANIM_ATTACK"]:
+            if self.action == shootingEnemyConfig["ANIM_ATTACK"]:
                 self.attacking = False
-            elif self.action == enemyConfig["ANIM_DEATH"]:
+            elif self.action == shootingEnemyConfig["ANIM_DEATH"]:
                 self.alive = False
                 
-        if (self.action == enemyConfig["ANIM_ATTACK"] and self.frameIndex >= enemyConfig["ANIMATION_STEPS"][enemyConfig["ANIM_ATTACK"]]-1):
+        if (self.action == shootingEnemyConfig["ANIM_ATTACK"] and self.frameIndex >= shootingEnemyConfig["ANIMATION_STEPS"][shootingEnemyConfig["ANIM_ATTACK"]]-1):
             self.projectile.goToPosition(self.body.centerx, self.body.centery)
             
         self.projectile.updateAnimation(surface, target)
