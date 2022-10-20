@@ -88,6 +88,18 @@ gameStages = [
         "audio": "./assets/audio/cinematic-metal.mp3",
         "bossPos": (700, 380),
         "playerPos": (200, 380)
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/guardian-dialogue.mp3",
+        "background": "./assets/images/stages/guardianMeeting.jpg"
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/highway.png",
+        "audio": "./assets/audio/cinematic-metal.mp3",
+        "guardianPos": (700, 380),
+        "playerPos": (200, 380)
     }
 ]
 
