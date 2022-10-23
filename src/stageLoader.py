@@ -3,6 +3,7 @@ from entity.enemy.shootingEnemy import ShootingEnemy
 from entity.enemy.walkingEnemy import WalkingEnemy
 from entity.emp import Emp
 from entity.enemy.boss import Boss
+from entity.enemy.guardian import Guardian
 from config import colorsConfig, gameSettings
 
 import pygame
@@ -25,6 +26,9 @@ class StageLoader():
         self.__clock = pygame.time.Clock()
         
         self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, DEPTH)
+        
+        iconImg = pygame.image.load("./assets/images/icon.png").convert()
+        pygame.display.set_icon(iconImg)
 
         self.__playerSpritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
         self.__shootingEnemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "shootingEnemy.png").convert_alpha()
@@ -32,6 +36,7 @@ class StageLoader():
         self.__empSpritesheet = pygame.image.load(SPRITESHEET_PATH + "emp.png").convert_alpha()
         self.__bossSpritesheet = pygame.image.load(SPRITESHEET_PATH + "boss.png").convert_alpha()
         self.__walkingEnemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "walkingEnemy.png").convert_alpha()
+        self.__guardianSpritesheet = pygame.image.load(SPRITESHEET_PATH + "guardian.png").convert_alpha()
         
         self.__emp = Emp(0, 0, self.__empSpritesheet)
 
@@ -67,7 +72,7 @@ class StageLoader():
                     quit()
 
 
-    def loadNormalStage(self, category, background, audio, playerPos, shootingEnemiesPos=[], walkingEnemiesPos=[], bossPos=None):
+    def loadNormalStage(self, category, background, audio, playerPos, shootingEnemiesPos=[], walkingEnemiesPos=[], bossPos=None, guardianPos=None):
         convertedBackground = pygame.image.load(background).convert()
         
         player = Player(playerPos[0], playerPos[1], self.__playerSpritesheet, self.__emp)
@@ -82,6 +87,9 @@ class StageLoader():
         
         if(bossPos != None):
             enemies.append(Boss(bossPos[0], bossPos[1], self.__bossSpritesheet))
+            
+        if(guardianPos != None):
+            enemies.append(Guardian(guardianPos[0], guardianPos[1], self.__guardianSpritesheet))
         
         if(audio != ""): self.__playAudio(audio)
         self.__emp.finished = False
@@ -118,4 +126,4 @@ class StageLoader():
                 
             pygame.display.update()
             
-        if(repeatThisStage): self.loadNormalStage(category, background, audio, playerPos, shootingEnemiesPos, walkingEnemiesPos, bossPos)
+        if(repeatThisStage): self.loadNormalStage(category, background, audio, playerPos, shootingEnemiesPos, walkingEnemiesPos, bossPos, guardianPos)
