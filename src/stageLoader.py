@@ -26,6 +26,9 @@ class StageLoader():
         self.__clock = pygame.time.Clock()
         
         self.__screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags, DEPTH)
+        
+        iconImg = pygame.image.load("./assets/images/icon.png").convert()
+        pygame.display.set_icon(iconImg)
 
         self.__playerSpritesheet = pygame.image.load(SPRITESHEET_PATH + "player.png").convert_alpha()
         self.__shootingEnemySpritesheet = pygame.image.load(SPRITESHEET_PATH + "shootingEnemy.png").convert_alpha()
