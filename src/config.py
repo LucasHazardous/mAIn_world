@@ -198,6 +198,26 @@ guardianConfig = {
     "ATTACK_FRAME": 4
 }
 
+finalBossConfig = {
+    "ANIMATION_STEPS": [8, 4, 7],
+    "ANIM_DEATH": 2,
+    "ANIM_RUN": 0,
+    "ANIM_ATTACK": 1,
+    "ANIM_HIT": 3,
+    "SIZE_X": 200,
+    "SIZE_Y": 200,
+    "SCALE": 3,
+    "OFFSET": [85, 70],
+    "ANIMATION_COOLDOWN": 100,
+    "HITBOX_WIDTH": 96,
+    "HITBOX_HEIGHT": 180,
+    "BASE_SPEED": 5,
+    "BASE_HEALTH": 150,
+    "DAMAGE": 10,
+    "SPEED": 4,
+    "ATTACK_FRAME": 3
+}
+
 projectileConfig = {
     "SPEED": 20,
     "ANIMATION_STEPS": [45],
