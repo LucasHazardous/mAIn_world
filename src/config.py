@@ -100,6 +100,18 @@ gameStages = [
         "audio": "./assets/audio/cinematic-metal.mp3",
         "guardianPos": (700, 380),
         "playerPos": (200, 380)
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/final-boss-dialogue.mp3",
+        "background": "./assets/images/stages/finalBossMeeting.jpg"
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/exit.png",
+        "audio": "./assets/audio/80s-synth-wave.mp3",
+        "finalBossPos": (700, 380),
+        "playerPos": (200, 380)
     }
 ]
 
