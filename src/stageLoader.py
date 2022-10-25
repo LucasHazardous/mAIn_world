@@ -1,9 +1,4 @@
-from entity.player import Player
-from entity.enemy.shootingEnemy import ShootingEnemy
-from entity.enemy.walkingEnemy import WalkingEnemy
-from entity.emp import Emp
-from entity.enemy.boss import Boss
-from entity.enemy.guardian import Guardian
+from entity import *
 from config import colorsConfig, gameSettings, guardianConfig, finalBossConfig
 
 import pygame
