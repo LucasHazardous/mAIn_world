@@ -100,6 +100,18 @@ gameStages = [
         "audio": "./assets/audio/cinematic-metal.mp3",
         "guardianPos": (700, 380),
         "playerPos": (200, 380)
+    },
+    {
+        "category": "cutscene",
+        "audio": "./assets/audio/final-boss-dialogue.mp3",
+        "background": "./assets/images/stages/finalBossMeeting.jpg"
+    },
+    {
+        "category": "normal",
+        "background": "./assets/images/stages/exit.png",
+        "audio": "./assets/audio/80s-synth-wave.mp3",
+        "finalBossPos": (700, 380),
+        "playerPos": (200, 380)
     }
 ]
 
@@ -179,11 +191,10 @@ bossConfig = {
 }
 
 guardianConfig = {
-    "ANIMATION_STEPS": [8, 6, 6, 4],
+    "ANIMATION_STEPS": [8, 6, 6],
     "ANIM_DEATH": 2,
     "ANIM_RUN": 0,
     "ANIM_ATTACK": 1,
-    "ANIM_HIT": 3,
     "SIZE_X": 200,
     "SIZE_Y": 200,
     "SCALE": 3,
@@ -196,6 +207,26 @@ guardianConfig = {
     "DAMAGE": 10,
     "SPEED": 4,
     "ATTACK_FRAME": 4
+}
+
+finalBossConfig = {
+    "ANIMATION_STEPS": [8, 4, 7],
+    "ANIM_DEATH": 2,
+    "ANIM_RUN": 0,
+    "ANIM_ATTACK": 1,
+    "ANIM_HIT": 3,
+    "SIZE_X": 200,
+    "SIZE_Y": 200,
+    "SCALE": 3,
+    "OFFSET": [85, 70],
+    "ANIMATION_COOLDOWN": 100,
+    "HITBOX_WIDTH": 96,
+    "HITBOX_HEIGHT": 180,
+    "BASE_SPEED": 5,
+    "BASE_HEALTH": 150,
+    "DAMAGE": 10,
+    "SPEED": 4,
+    "ATTACK_FRAME": 3
 }
 
 projectileConfig = {
