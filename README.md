@@ -31,6 +31,21 @@ pip install pygame
 python main.py
 ```
 
+## How to compile it into an executable
+
+Install pyinstaller with
+
+```
+pip install pyinstaller
+```
+
+compile:
+```
+pyinstaller ./src/main.py --onefile
+```
+
+and then **move assets folder to the same directory as your .exe file**.
+
 ---
 
 ## Controls
